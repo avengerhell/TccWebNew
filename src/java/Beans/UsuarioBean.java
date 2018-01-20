@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ * tccwebnew  
  */
 package Beans;
 
@@ -78,10 +79,10 @@ public class UsuarioBean implements Serializable {
     }
 
     public List<Usuario> getUsers() {
-        users = usuarioFacade.findAll();
+     //   users = usuarioFacade.findAll();
         return users;
     }
-
+       
     public Persona getPersona() {
         return persona;
     }
@@ -269,5 +270,19 @@ public class UsuarioBean implements Serializable {
            personas = null;
         }
 }
+    public void buscarUsuario2() {
+
+        if (usuario != null) {
+            try {
+                Map<String, Object> parameters = new HashMap<>();
+                parameters.put("user", "%" + usuario.toLowerCase() + "%");
+                users = usuarioFacade.obtenerUsuario2(parameters);
+            } catch (Exception ex) {
+
+            }
+        } else {
+            users = null;
+        }
+    }
     
 }
