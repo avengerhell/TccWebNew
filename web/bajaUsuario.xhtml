@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Bajas de Usuarios</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card">
+                            <h1>Buscar Usuario</h1>
+                            <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
+                                <p:outputLabel for="usuario" value="Nombre"/>
+                                <p:inputText id="usuario" value="#{usuarioBeanMB.usuario}"/>
+
+
+                            </p:panelGrid>
+                            <div class="card">
+                                <div class="ui-g">
+                                    <div class="ui-grid-col-2">
+                                        <p:commandButton id="agregar" value="Buscar" actionListener="#{usuarioBeanMB.buscarUsuario()}" ajax="true" update="tabla"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card" >
+                            <h1>Resultados</h1>
+                            <p:dataTable id="tabla" var="us" value="#{usuarioBeanMB.users}" reflow="true"  selectionMode="single" rowKey="#{us.usuarioPK.codUsuario}" rowSelectMode="true">
+                                <!--<f:facet name="header"></f:facet>-->
+
+                                <p:column headerText="Codigo de Usuario">
+                                    <h:outputText value="#{us.usuarioPK.codUsuario}" />
+                                </p:column>
+                                <p:column headerText="Nombre y Apellido">
+                                    <h:outputText value="#{us.persona.nombre}  #{us.persona.apellido}" />
+                                </p:column>
+                                <p:column headerText="Codigo de Persona">
+                                    <h:outputText value="#{us.persona.codPersona}" />
+                                </p:column>
+                                <p:column headerText="Tipo de Usuario">
+                                    <h:outputText value="#{us.tipoUsuario}" />
+                                </p:column>
+                                <p:column>
+                                    <p:commandButton value ="Eliminar"  type ="button"  onclick="PF('dlg1').show();">
+                                        <p:confirm header="Confirmación" message="Está seguro??" icon="ui-icon-alert" />
+                                        <f:setPropertyActionListener target="#{usuarioBeanMB.users}" value="#{us}"/>
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+                            <h:form>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" action="#{usuarioBeanMB.eliminar()}" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                            </h:form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

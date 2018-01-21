@@ -1,0 +1,94 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core"
+                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                 template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Alta de Clientes - Persona Fisica</ui:define>
+    <ui:define name="content">
+        <h:form>
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card">
+                            <h1>Datos Básicos</h1>
+
+                            <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
+
+                                <p:outputLabel value="Nombres: " title="Nombre de la Persona"/>
+                                <p:inputText value="#{personaBeanMB.persona.nombre}" maxlength="15"/>
+
+                                <p:outputLabel value="Apellidos: "/>
+                                <p:inputText value="#{personaBeanMB.persona.apellido}" maxlength="20"/>
+
+                                <p:outputLabel value="Genero: "/>
+                                <p:selectOneMenu id="genero" value="#{personaBeanMB.persona.sexo}" style="width:200px">
+                                    <f:selectItem itemLabel="Seleccionar Sexo: " itemValue="#{null}" />
+                                    <f:selectItem itemLabel="1-Hombre" itemValue="H" />
+                                    <f:selectItem itemLabel="2-Mujer" itemValue="M" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Fecha de Nacimiento: "/>
+                                <p:calendar id="mask" value="#{personaBeanMB.persona.fecNacimiento}" pattern="dd/MM/yyyy" mask="true"/>
+
+                                <p:outputLabel value="Tipo documento: "/>
+                                <p:selectOneMenu id="tipoIdent" value="#{personaBeanMB.identificacion.codIdent}" style="width:200px">
+                                    <f:selectItem itemLabel="Seleccionar Tipo" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItems value="#{tipoIdentBeanMB.tipos}"
+                                                   var="t"
+                                                   itemLabel="#{t.descripcion}"
+                                                   itemValue="#{t}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Numero Documento: " />
+                                <p:inputText value="#{personaBeanMB.identificacion.numero}" />
+                                <p:outputLabel value="Pais: "/>
+                                <p:selectOneMenu id="pais" value="#{personaBeanMB.persona.codPais}" style="width:200px"  >
+                                    <f:selectItem itemLabel="Seleccionar Pais" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItems value="#{paisBeanMB.paises}"
+                                                   var="pa"
+                                                   itemLabel="#{pa.descripcion}"
+                                                   itemValue="#{pa}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Tipo de Cliente: "/>
+                                <p:selectOneMenu id="tipo" value="#{personaBeanMB.cliente.tipoCliente}" style="width:200px"  >
+                                    <f:selectItem itemLabel="Seleccionar Tipo" itemValue="#{null}" />
+                                    <f:selectItem itemLabel="Normal" itemValue="1" />
+                                    <f:selectItem itemLabel="Especial" itemValue="2" />
+                                    <f:selectItem itemLabel="VIP" itemValue="3" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Estado Actual: "/>
+                                <p:selectOneMenu id="estado" value="#{personaBeanMB.cliente.estado}" style="width:200px"  >
+                                    <f:selectItem itemLabel="Seleccionar Estado" itemValue="" />
+                                    <f:selectItem itemLabel="Activo" itemValue="1" />
+                                    <f:selectItem itemLabel="Inactivo" itemValue="2" />
+                                    <f:selectItem itemLabel="Suspendido" itemValue="3" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Numero telefono: "/>
+                                <p:inputText value="#{personaBeanMB.telefono.numero}" />
+                                <p:outputLabel value="Direccion: " />
+                                <p:inputText value="#{personaBeanMB.direccion.detalle}" />
+
+                            </p:panelGrid>
+                            
+                            <div class="card">
+                                <div class="ui-g">
+                                    <div class="ui-grid-col-2">
+                                        <p:commandButton actionListener="#{personaBeanMB.insertar()}" value="Agregar" oncomplete="limpiarForm()"/> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

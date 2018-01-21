@@ -48,22 +48,20 @@
                                     <f:selectItem itemLabel="Option 3" itemValue="3" />
                                 </p:selectOneMenu>
 
-
                             </p:panelGrid>
                             <div class="card">
                                 <div class="ui-g">
                                     <div class="ui-grid-col-2">
-                                        <p:commandButton id="agregar" value="Agregar Usuario" actionListener="#{usuarioBeanMB.insertar()}" />
+                                        <p:commandButton id="agregar" value="Agregar Usuario" actionListener="#{usuarioBeanMB.insertar}" ajax="true" />
                                     </div>
                                 </div>
                             </div>
-
-                            </div>
-
                         </div>
 
                     </div>
+
                 </div>
+            </div>
         </h:form>
     </ui:define>
 

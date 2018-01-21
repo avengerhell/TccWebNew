@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Modificación de Usuarios</ui:define>
+    <ui:define name="title">Modificación de Clientes</ui:define>
 
     <ui:define name="content">
         <h:form>
@@ -13,17 +13,17 @@
                 <div class="ui-g">
                     <div class="ui-g-12">
                         <div class="card">
-                            <h1>Buscar Usuario</h1>
+                            <h1>Buscar Cliente</h1>
                             <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
                                 <p:outputLabel for="usuario" value="Nombre"/>
-                                <p:inputText id="usuario" value="#{usuarioBeanMB.usuario}"/>
+                                <p:inputText id="usuario" value="#{clienteBeanMB.nombre}"/>
 
 
                             </p:panelGrid>
                             <div class="card">
                                 <div class="ui-g">
                                     <div class="ui-grid-col-2">
-                                        <p:commandButton id="agregar" value="Buscar" actionListener="#{usuarioBeanMB.buscarUsuario()}" ajax="true" update="tabla"/>
+                                        <p:commandButton id="agregar" value="Buscar" actionListener="#{clienteBeanMB.obtenerClienteXnom}" ajax="true" update="tabla"/>
                                     </div>
                                 </div>
                             </div>
@@ -31,20 +31,20 @@
                         </div>
                         <div class="card" >
                             <h1>Resultados</h1>
-                            <p:dataTable id="tabla" var="us" value="#{usuarioBeanMB.users}" reflow="true"  selectionMode="single"
-                                         rowKey="#{us.usuarioPK.codUsuario}" rowSelectMode="true">
+                            <p:dataTable id="tabla" var="clie" value="#{clienteBeanMB.clientes}" reflow="true"  selectionMode="single"
+                                         rowKey="#{clie.codCliente}" rowSelectMode="true">
 
-                                <p:column headerText="Codigo de Usuario">
-                                    <h:outputText value="#{us.usuarioPK.codUsuario}" />
+                                <p:column headerText="Codigo deCliente">
+                                    <h:outputText value="#{clie.codCliente}" />
                                 </p:column>
                                 <p:column headerText="Nombre y Apellido">
-                                    <h:outputText value="#{us.persona.nombre}  #{us.persona.apellido}" />
+                                    <h:outputText value="#{clie.codPersona.nombre}  #{clie.codPersona.apellido}" />
                                 </p:column>
                                 <p:column headerText="Codigo de Persona">
-                                    <h:outputText value="#{us.persona.codPersona}" />
+                                    <h:outputText value="#{clie.estado}" />
                                 </p:column>
                                 <p:column headerText="Tipo de Usuario">
-                                    <h:outputText value="#{us.tipoUsuario}" />
+                                    <h:outputText value="#{clie.tipoCliente}" />
                                 </p:column>
                                 <p:column>
                                     <p:commandButton value ="editar"  type ="button"  onclick="PF('dlg1').show()" update="formModCli" >

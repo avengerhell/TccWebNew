@@ -19,10 +19,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -48,10 +46,10 @@ public class UsuarioBean implements Serializable {
     private Usuario user;
     private List<Usuario> users;
     private List<Persona> personas;
-    
+
     private List<EventoCab> eventos;
     private EventoCab eventoSelected;
-       
+
     private String usuarioNombre;
 
     private String text;
@@ -79,10 +77,10 @@ public class UsuarioBean implements Serializable {
     }
 
     public List<Usuario> getUsers() {
-     //   users = usuarioFacade.findAll();
+        users = users;
         return users;
     }
-       
+
     public Persona getPersona() {
         return persona;
     }
@@ -102,17 +100,17 @@ public class UsuarioBean implements Serializable {
     public void setUsuarioNombre(String usuarioNombre) {
         this.usuarioNombre = usuarioNombre;
     }
-    
+
     public List<Persona> getPersonas() {
         return personas;
     }
 
     public void setPersonas(List<Persona> personas) {
         this.personas = personas;
-        
+
     }
-    
-     public String getText() {
+
+    public String getText() {
         return text;
     }
 
@@ -121,7 +119,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public List<EventoCab> getEventos() {
-        if (eventos == null){
+        if (eventos == null) {
             eventos = eventoFacade.findAll();
         }
         return eventos;
@@ -138,10 +136,8 @@ public class UsuarioBean implements Serializable {
     public void setEventoSelected(EventoCab eventoSelected) {
         this.eventoSelected = eventoSelected;
     }
-    
-    
-//<editor-fold>
 
+//<editor-fold>
 //region Sesiones
     public String validateUsernamePassword() {
         boolean valid;
@@ -265,11 +261,12 @@ public class UsuarioBean implements Serializable {
     public void obtenerParametroPersona(Usuario us) {
 
         String cod = us.getUsuarioPK().getCodUsuario();
-        personas  = personaFacade.obtenerPersonaXCodCliente(cod);
-        if(personas ==null){
-           personas = null;
+        personas = personaFacade.obtenerPersonaXCodCliente(cod);
+        if (personas == null) {
+            personas = null;
         }
-}
+    }
+
     public void buscarUsuario2() {
 
         if (usuario != null) {
@@ -284,5 +281,5 @@ public class UsuarioBean implements Serializable {
             users = null;
         }
     }
-    
+
 }
