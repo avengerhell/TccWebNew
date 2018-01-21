@@ -33,6 +33,7 @@ public class ClienteBean implements Serializable {
     @ManagedProperty("#{personaBeanMB.persona}")
     private Persona persona;
     private String re;
+    private String nombre;
 
     public ClienteBean() {
         //cliente = new Cliente();
@@ -90,4 +91,18 @@ public class ClienteBean implements Serializable {
         clientes = clienteFacade.obtenerCliente(re);
     }
 
+    public void obtenerCliente2() {
+        if (re != null) {
+            try {
+                Map<String, Object> parameters = new HashMap<>();
+                parameters.put("clie", "'%" + re.toLowerCase() + "%");
+                clientes = clienteFacade.obtenerClientexNom(parameters);
+            } catch (Exception ex) {
+                String error = ex.toString();
+            }
+
+        } else {
+            clientes = null;
+        }
+    }
 }

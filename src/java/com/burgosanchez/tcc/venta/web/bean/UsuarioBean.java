@@ -78,7 +78,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public List<Usuario> getUsers() {
-        users = usuarioFacade.findAll();
+       // users = usuarioFacade.findAll();-->HAY QUE CARGAR DE OTRA FORMA ESTE GET O SINO LE CAGA A ALGUNOS FORMS
         return users;
     }
 
@@ -153,9 +153,9 @@ public class UsuarioBean implements Serializable {
             session.setAttribute("username", users.get(0));
             session.setAttribute("tipoUsuario", users.get(0).getTipoUsuario());
             if (users.get(0).getTipoUsuario().equals("1")) {
-                return "welcomeFrame";
+                return "dashboard";
             } else {
-                return "welcomeEvento";
+                return "dashboard";
             }
 
         } else {
