@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Crear Horario</ui:define>
+
+    <ui:define name="content">
+        <h:form id ="formInsertar">
+            <p:panelGrid columns ="2">
+                <p:outputLabel value="Evento"/>
+                <p:selectOneMenu id="ev" value="#{listaPrecioBeanMB.lista.eventoCab}" style="width:200px" converter="omnifaces.SelectItemsConverter">
+                    <p:ajax listener="#{listaPrecioBeanMB.onEventChange()}" update="se" />
+                    <f:selectItem itemLabel="Seleccionar Tipo" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItems value="#{eventoCabBeanMB.eventos}"
+                                   var="tip"
+                                   itemLabel="#{tip.nombre}"
+                                   itemValue="#{tip}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Sector"/>
+                <p:selectOneMenu id="se" value="#{listaPrecioBeanMB.lista.sector}" style="width:200px" converter="omnifaces.SelectItemsConverter">
+                    <f:selectItem itemLabel="Seleccionar Tipo" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItems value="#{listaPrecioBeanMB.sectores}"
+                                   var="tip"
+                                   itemLabel="#{tip.descripcion}"
+                                   itemValue="#{tip}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Valor"/>
+                <p:inputText value="#{listaPrecioBeanMB.lista.valor}" maxlength="50"/>
+
+                <p:outputLabel value="Fecha inicio"/>
+                <p:calendar id="mask" value="#{listaPrecioBeanMB.lista.fecInicio}" pattern="dd/MM/yyyy" mask="true" />
+                <p:outputLabel value="Fecha fin"/>
+                <p:calendar id="mask1" value="#{listaPrecioBeanMB.lista.fecFin}" pattern="dd/MM/yyyy" mask="true" />
+
+            </p:panelGrid>
+            <p:commandButton actionListener="#{listaPrecioBeanMB.insertar()}" value="Ingresar grilla" oncomplete="limpiarForm()"/> 
+        </h:form>
+    </ui:define>
+
+</ui:composition>
