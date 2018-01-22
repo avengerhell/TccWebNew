@@ -94,9 +94,9 @@ public class ClienteBean implements Serializable {
     public void obtenerCliente2() {
         if (re != null) {
             try {
-                Map<String, Object> parameters = new HashMap<>();
-                parameters.put("clie", "'%" + re.toLowerCase() + "%");
-                clientes = clienteFacade.obtenerClientexNom(parameters);
+               
+
+                clientes = clienteFacade.obtenerClientexNom(re);
             } catch (Exception ex) {
                 String error = ex.toString();
             }

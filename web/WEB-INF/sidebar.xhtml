@@ -49,15 +49,18 @@
                         <p:submenu id="om_clientes" label="Clientes" icon="fa fa-sitemap">
                             <p:submenu id="om_altaClientes" label="Alta Clientes" icon="fa fa-columns">
                                 <p:menuitem id="om_altaClientesP" value="Persona Fisica" icon="fa fa-columns" outcome="altaClienteP"  />
-                                <p:menuitem id="om_maltaClientesJ" value="Persona Juridica" icon="fa fa-columns" outcome="altaClienteJ"  />
+                                <p:menuitem id="om_altaClientesJ" value="Persona Juridica" icon="fa fa-columns" outcome="altaClienteJ"  />
                             </p:submenu>
                             <p:menuitem id="om_modifClientes" value="Modificacion Clientes" icon="fa fa-columns" outcome="/modifCliente" />
-                            <p:menuitem id="om_bajaClientes" value="Baja Clientes" icon="fa fa-columns" outcome="/bajaUsuario" />
+                            <p:menuitem id="om_bajaClientes" value="Baja Clientes" icon="fa fa-columns" outcome="/bajaCliente" />
                         </p:submenu>
                         <p:submenu id="om_proveedores" label="Proveedores" icon="fa fa-sitemap">
-                            <p:menuitem id="om_altaProveedores" value="Alta Proveedores" icon="fa fa-columns" outcome="/altaUsuario" />
-                            <p:menuitem id="om_modifProveedores" value="Modificacion Proveedores" icon="fa fa-columns" outcome="/modifUsuario" />
-                            <p:menuitem id="om_bajaProveedores" value="Baja Proveedores" icon="fa fa-columns" outcome="/bajaUsuario" />
+                            <p:submenu id="om_altaProveedores" label="Alta Clientes" icon="fa fa-columns">
+                                <p:menuitem id="om_altaProveedoresP" value="Persona Fisica" icon="fa fa-columns" outcome="altaProveedorP"  />
+                                <p:menuitem id="om_altaProveedoresJ" value="Persona Juridica" icon="fa fa-columns" outcome="altaProveedorJ"  />
+                            </p:submenu>    
+                            <p:menuitem id="om_modifProveedores" value="Modificacion Proveedores" icon="fa fa-columns" outcome="/modifProveedores" />
+                            <p:menuitem id="om_bajaProveedores" value="Baja Proveedores" icon="fa fa-columns" outcome="/bajaProveedores" />
                         </p:submenu>
                         <p:submenu id="om_eventos" label="Eventos" icon="fa fa-sitemap">
                             <p:menuitem id="om_crearEventos" value="Crear Evento" icon="fa fa-columns" outcome="/EventoCabFrame" />
