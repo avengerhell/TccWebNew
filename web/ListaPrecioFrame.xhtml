@@ -9,6 +9,7 @@
 
     <ui:define name="content">
         <h:form id ="formInsertar">
+            <p:growl id="growl" showDetail="true" sticky="false" />
             <p:panelGrid columns ="2">
                 <p:outputLabel value="Evento"/>
                 <p:selectOneMenu id="ev" value="#{listaPrecioBeanMB.lista.eventoCab}" style="width:200px" converter="omnifaces.SelectItemsConverter">
@@ -38,7 +39,7 @@
                 <p:calendar id="mask1" value="#{listaPrecioBeanMB.lista.fecFin}" pattern="dd/MM/yyyy" mask="true" />
 
             </p:panelGrid>
-            <p:commandButton actionListener="#{listaPrecioBeanMB.insertar()}" value="Ingresar grilla" oncomplete="limpiarForm()"/> 
+            <p:commandButton actionListener="#{listaPrecioBeanMB.insertar()}" value="Ingresar grilla" oncomplete="limpiarForm()" update="growl"/> 
         </h:form>
     </ui:define>
 

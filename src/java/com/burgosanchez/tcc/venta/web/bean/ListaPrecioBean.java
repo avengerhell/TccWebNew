@@ -10,7 +10,7 @@ import com.burgosanchez.tcc.venta.ejb.ListaPrecioPK;
 import com.burgosanchez.tcc.venta.ejb.Sector;
 import com.burgosanchez.tcc.venta.jpa.ListaPrecioFacade;
 import com.burgosanchez.tcc.venta.jpa.SectorFacade;
-import com.burgosanchez.tcc.venta.web.common.MsgUtil;
+import com.burgosanchez.tcc.venta.web.common.Messages;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -80,19 +80,20 @@ public class ListaPrecioBean implements Serializable {
         lista.setListaPrecioPK(listaPK);
         listaFacade.create(lista);
         lista = new ListaPrecio();
-        //MsgUtil mensaje = new MsgUtil();
-        MsgUtil.addInfoMessage("Ingresado Correctamente");
+        Messages.growlMessageInfo("Ingresado Correctamente", null);
         
     }
 
     public void modificar() {
         listaFacade.edit(lista);
         lista = new ListaPrecio();
+        Messages.growlMessageInfo("Modificado Correctamente", null);
     }
 
     public void eliminar() {
         listaFacade.remove(lista);
         lista = new ListaPrecio();
+        Messages.growlMessageInfo("Eliminado Correctamente", null);
     }
 
     public void onEventChange() {

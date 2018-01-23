@@ -13,6 +13,7 @@ import com.burgosanchez.tcc.venta.jpa.PersonaFacade;
 import com.burgosanchez.tcc.venta.jpa.UsuarioFacade;
 import com.burgosanchez.tcc.venta.jpa.BasicosFacade;
 import com.burgosanchez.tcc.venta.jpa.EventoCabFacade;
+import com.burgosanchez.tcc.venta.web.common.Messages;
 import com.burgosanchez.tcc.venta.web.common.MsgUtil;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -191,11 +192,11 @@ public class UsuarioBean implements Serializable {
             personaFacade.create(persona);
             usuarioFacade.create(user);
             usuarioFacade.insertarUsuarioEvento(user, eventoSelected);
-            MsgUtil.addInfoMessage("Se creó exitosamente el usuario");
+            Messages.growlMessageInfo("Se creó exitosamente el usuario", null);
             limpiarCampos();
 
         } else {
-            MsgUtil.addInfoMessage("Error en al creación del usuario verifique los campos");
+            Messages.growlMessageWarning("Error en al creación del usuario verifique los campos",null);
         }
 
     }

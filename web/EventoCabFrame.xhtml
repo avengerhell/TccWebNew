@@ -9,6 +9,7 @@
 
     <ui:define name="content">
         <h:form id ="formInsertar">
+            <p:growl id="growl" showDetail="true" sticky="false" />
             <p:panelGrid columns ="2">
                 <p:outputLabel value="Proveedor: " />
                 <p:selectOneMenu id="prov" value="#{eventoCabBeanMB.evento.codProveedor}" style="width:200px" converter="omnifaces.SelectItemsConverter">
@@ -54,7 +55,7 @@
                 </p:selectOneMenu>
 
             </p:panelGrid>
-            <p:commandButton actionListener="#{eventoCabBeanMB.insertar()}" value="Ingresar Evento"/> 
+            <p:commandButton actionListener="#{eventoCabBeanMB.insertar()}" value="Ingresar Evento" update="growl"/> 
             <p:commandButton value="Cancelar" onclick="inser.hide();"/> 
 
             <p:commandButton value="Sector" oncomplete="PF('diginsertarSec').show()" update=":formAddSector">
@@ -73,6 +74,7 @@
                   widgetVar="diginsertarSec" modal="true" resizable="false" minWidth="200" closeOnEscape="true" onHide="PF('digModRango').hide();">
 
             <h:form id ="formAddSector">
+                <p:growl id="growl2" showDetail="true" sticky="false" />
                 <p:panelGrid columns ="2"> 
                     <p:outputLabel  value="Evento: " />
                     <p:inputText id="parO" value="#{sectorBeanMB.event}" style="width:200px" readonly="true"/>
@@ -84,7 +86,7 @@
                     <p:inputText value="#{sectorBeanMB.sector.cantidad}" style="width:195px" pt:type="number"/> 
 
                 </p:panelGrid>
-                <p:commandButton value="Insertar Sector" actionListener="#{sectorBeanMB.insertar()}"/>
+                <p:commandButton value="Insertar Sector" actionListener="#{sectorBeanMB.insertar()}" update="growl2"/>
                 <p:commandButton value="Cancelar" onclick="inser.hide();"/> 
             </h:form>
         </p:dialog>
@@ -93,6 +95,7 @@
                   widgetVar="diginsertarLoca" modal="true" resizable="false" minWidth="200" closeOnEscape="true" onHide="PF('digModRango').hide();">
             <!--<p:ajax event="close" update=":formInsertarRango:rangoData" />-->
             <h:form id ="formAddLocal">
+                <p:growl id="growl3" showDetail="true" sticky="false" />
                 <p:panelGrid columns ="4"> 
                     <p:outputLabel  value="Evento: " />
                     <p:inputText id="parO" value="#{localidadEventoBeanMB.event}" style="width:200px" readonly="true"/>
@@ -105,7 +108,7 @@
                                        itemValue="#{loc.codLocalidad}"/>
                     </p:selectOneMenu> 
                 </p:panelGrid>
-                <p:commandButton value="Insertar Local" actionListener="#{localidadEventoBeanMB.insertar()}"/>
+                <p:commandButton value="Insertar Local" actionListener="#{localidadEventoBeanMB.insertar()}" update="growl3"/>
                 <p:commandButton value="Cancelar" onclick="inser.hide();"/> 
             </h:form>
         </p:dialog>
@@ -114,6 +117,7 @@
                   widgetVar="diginsertarCon" modal="true" resizable="false" minWidth="200" closeOnEscape="true" onHide="PF('digModRango').hide();">
             <!--<p:ajax event="close" update=":formInsertarRango:rangoData" />-->
             <h:form id ="formAddCondi">
+                <p:growl id="growl4" showDetail="true" sticky="false" />
                 <p:panelGrid columns ="4"> 
                     <p:outputLabel  value="Evento: " />
                     <p:inputText id="parO" value="#{condicionEventoBeanMB.evento}" style="width:200px" readonly="true"/>
@@ -129,7 +133,8 @@
                     <p:inputText id="valo" value="#{condicionEventoBeanMB.condicion.valor}" style="width:200px" />
                 </p:panelGrid>
                 <p:commandButton value="Insertar Local" actionListener="#{condicionEventoBeanMB.insertar()}"
-                                 oncomplete="PF('diginsertarCon').hide();"/>
+                                 oncomplete="PF('diginsertarCon').hide();"
+                                 update="growl4"/>
                 <p:commandButton value="Cancelar" onclick="inser.hide();"/> 
             </h:form>
         </p:dialog>

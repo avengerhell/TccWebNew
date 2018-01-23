@@ -6,11 +6,9 @@
 package com.burgosanchez.tcc.venta.web.bean;
 
 import com.burgosanchez.tcc.venta.ejb.EventoCab;
-import com.burgosanchez.tcc.venta.ejb.Horario;
-import com.burgosanchez.tcc.venta.ejb.Sector;
 import com.burgosanchez.tcc.venta.ejb.Usuario;
 import com.burgosanchez.tcc.venta.jpa.EventoCabFacade;
-import com.burgosanchez.tcc.venta.web.common.MsgUtil;
+import com.burgosanchez.tcc.venta.web.common.Messages;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -118,18 +116,20 @@ public class EventoCabBean implements Serializable {
     public void insertar() {
         evento.setCodEvento(String.valueOf(eventoFacade.obtenerSecuenciaVal()));
         eventoFacade.create(evento);
-        MsgUtil.addInfoMessage("Se creó exitosamente el evento");
+        Messages.growlMessageInfo("Se creó exitosamente el evento", null);
         //evento = new EventoCab();
     }
 
     public void modificar() {
         eventoFacade.edit(evento);
         evento = new EventoCab();
+        Messages.growlMessageInfo("Se modificó el evento", null);
     }
 
     public void eliminar() {
         eventoFacade.remove(evento);
         evento = new EventoCab();
+        Messages.growlMessageInfo("Se eliminó exitosamente el evento", null);
     }
 
     public void obtenerParametroEvento() {

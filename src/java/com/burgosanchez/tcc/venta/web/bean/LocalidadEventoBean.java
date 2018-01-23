@@ -8,6 +8,7 @@ package com.burgosanchez.tcc.venta.web.bean;
 import com.burgosanchez.tcc.venta.ejb.LocalidadEvento;
 import com.burgosanchez.tcc.venta.ejb.LocalidadEventoPK;
 import com.burgosanchez.tcc.venta.jpa.LocalidadEventoFacade;
+import com.burgosanchez.tcc.venta.web.common.Messages;
 import com.burgosanchez.tcc.venta.web.common.MsgUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -88,17 +89,19 @@ public class LocalidadEventoBean implements Serializable{
         localidad.setLocalidadEventoPK(localPK);
         localidadFacade.create(localidad);
         localidad = new LocalidadEvento();
-        MsgUtil.addInfoMessage("Se creó exitosamente la localidad para el evento");
+        Messages.growlMessageInfo("Se creó exitosamente la localidad para el evento", null);
     }
 
     public void modificar() {
         localidadFacade.edit(localidad);
         localidad = new LocalidadEvento();
+        Messages.growlMessageInfo("Se modificó exitosamente la localidad para el evento", null);
     }
 
     public void eliminar() {
         localidadFacade.remove(localidad);
         localidad = new LocalidadEvento();
+        Messages.growlMessageInfo("Se eliminó exitosamente la localidad para el evento", null);
     }
 
 }

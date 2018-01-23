@@ -9,6 +9,7 @@
 
     <ui:define name="content">
         <h:form id ="formInsertar">
+            <p:growl id="growl" showDetail="true" sticky="false" />
             <p:panelGrid columns ="2">
                 <p:outputLabel value="Evento: "/>
                 <p:selectOneMenu id="ti" value="#{horarioBeanMB.event}" style="width:200px" converter="omnifaces.SelectItemsConverter">
@@ -67,7 +68,7 @@
 
             </p:panelGrid>
 
-            <p:commandButton actionListener="#{horarioBeanMB.horarios()}" value="Generar" /> 
+            <p:commandButton actionListener="#{horarioBeanMB.horarios()}" value="Generar" update="growl"/> 
 
         </h:form>
     </ui:define>

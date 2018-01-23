@@ -8,7 +8,7 @@ package com.burgosanchez.tcc.venta.web.bean;
 import com.burgosanchez.tcc.venta.ejb.Horario;
 import com.burgosanchez.tcc.venta.ejb.HorarioPK;
 import com.burgosanchez.tcc.venta.jpa.HorarioFacade;
-import com.burgosanchez.tcc.venta.web.common.MsgUtil;
+import com.burgosanchez.tcc.venta.web.common.Messages;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -166,16 +166,19 @@ public class HorarioBean implements Serializable {
         hora.setApertura(apertura);
         horarioFacade.create(hora);
         hora = new Horario();
+        Messages.growlMessageInfo("Se insertó el horario", null);
     }
 
     public void modificar() {
         horarioFacade.edit(hora);
         hora = new Horario();
+        Messages.growlMessageInfo("Se modificó el horario", null);
     }
 
     public void eliminar() {
         horarioFacade.remove(hora);
         hora = new Horario();
+        Messages.growlMessageInfo("Se eliminó el horario", null);
     }
 
     public void horarios() {
@@ -191,7 +194,7 @@ public class HorarioBean implements Serializable {
                     Integer.valueOf(dia_hasta),
                     Integer.valueOf(periodo),
                     String.valueOf(format.format(apertura)));
-            MsgUtil.addInfoMessage("Se crearon los horarios para el evento seleccionado");
+            Messages.growlMessageInfo("Se crearon los horarios para el evento seleccionado", null);
         } catch (Exception e) {
             System.out.println(e);
         }
