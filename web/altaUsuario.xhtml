@@ -14,50 +14,51 @@
                     <div class="ui-g-12">
                         <div class="card">
                             <h1>Datos Básicos</h1>
-                            <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
-                                <p:outputLabel for="nombre" value="Nombre"/>
-                                <p:inputText id="nombre" value="#{usuarioBeanMB.persona.nombre}"/>
-                                <p:outputLabel for="apellido" value="Apellido"/>
-                                <p:inputText id="apellido" value="#{usuarioBeanMB.persona.apellido}"/>
-                                <p:outputLabel for="genero" value="Género"/>
-                                <p:selectOneMenu  id="genero" style="width:200px;" value="#{usuarioBeanMB.persona.sexo}">
-                                    <f:selectItem itemLabel="Masculino" itemValue="H" />
-                                    <f:selectItem itemLabel="Femenino" itemValue="M" />
-                                </p:selectOneMenu>
-                                <p:outputLabel for="nacimiento" value="Fecha Nacimiento"/>
-                                <p:calendar id="nacimiento" pattern="MM/dd/yyyy" value="#{usuarioBeanMB.persona.fecNacimiento}"/>
-                                <p:outputLabel for="pais" value="País"/>
-                                <p:selectOneMenu id="pais" value="#{usuarioBeanMB.persona.codPais}" style="width:200px">
-                                    <f:selectItem itemLabel="Seleccionar Pais" itemValue="#{null}"/>
-                                    <f:selectItems value="#{paisBeanMB.paises}"
-                                                   var="pa"
-                                                   itemLabel="#{pa.descripcion}"
-                                                   itemValue="#{pa}"/>
-                                    <p:clientValidator />
-                                </p:selectOneMenu>
-                                <p:outputLabel for="usuario" value="Usuario"/>
-                                <p:inputText id="usuario" value="#{usuarioBeanMB.user.nomUser}"/>
-                                <p:outputLabel for="contraseña" value="Contraseña"/>
-                                <p:password id="contraseña" value="#{usuarioBeanMB.user.password}"/>
-                                <p:outputLabel for="rep-contraseña" value="Repetir Contraseña"/>
-                                <p:password id="rep-contraseña" value="#{usuarioBeanMB.user.password}"/>
-                                <p:outputLabel for="tipo_usuario" value="Tipo Usuario"/>
-                                <p:selectOneMenu  id="tipo_usuario" style="width:200px;" value="#{usuarioBeanMB.user.tipoUsuario}">
-                                    <f:selectItem itemLabel="Administrador" itemValue="1" />
-                                    <f:selectItem itemLabel="Proveedor" itemValue="2" />
-                                    <f:selectItem itemLabel="Option 3" itemValue="3" />
-                                </p:selectOneMenu>
+                            <p:panel header="ALTA DE USUARIO" >
+                                <h:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
+                                    <p:outputLabel for="nombre" value="Nombre"/>
+                                    <p:inputText id="nombre" value="#{usuarioBeanMB.persona.nombre}"/>
+                                    <p:outputLabel for="apellido" value="Apellido"/>
+                                    <p:inputText id="apellido" value="#{usuarioBeanMB.persona.apellido}"/>
+                                    <p:outputLabel for="genero" value="Género"/>
+                                    <p:selectOneMenu  id="genero" style="width:200px;" value="#{usuarioBeanMB.persona.sexo}">
+                                        <f:selectItem itemLabel="Masculino" itemValue="H" />
+                                        <f:selectItem itemLabel="Femenino" itemValue="M" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="nacimiento" value="Fecha Nacimiento"/>
+                                    <p:calendar id="nacimiento" pattern="MM/dd/yyyy" value="#{usuarioBeanMB.persona.fecNacimiento}"/>
+                                    <p:outputLabel for="pais" value="País"/>
+                                    <p:selectOneMenu id="pais" value="#{usuarioBeanMB.persona.codPais}" style="width:200px">
+                                        <f:selectItem itemLabel="Seleccionar Pais" itemValue="#{null}"/>
+                                        <f:selectItems value="#{paisBeanMB.paises}"
+                                                       var="pa"
+                                                       itemLabel="#{pa.descripcion}"
+                                                       itemValue="#{pa}"/>
+                                        <p:clientValidator />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="usuario" value="Usuario"/>
+                                    <p:inputText id="usuario" value="#{usuarioBeanMB.user.nomUser}"/>
+                                    <p:outputLabel for="contraseña" value="Contraseña"/>
+                                    <p:password id="contraseña" value="#{usuarioBeanMB.user.password}"/>
+                                    <p:outputLabel for="rep-contraseña" value="Repetir Contraseña"/>
+                                    <p:password id="rep-contraseña" value="#{usuarioBeanMB.user.password}"/>
+                                    <p:outputLabel for="tipo_usuario" value="Tipo Usuario"/>
+                                    <p:selectOneMenu  id="tipo_usuario" style="width:200px;" value="#{usuarioBeanMB.user.tipoUsuario}">
+                                        <f:selectItem itemLabel="Administrador" itemValue="1" />
+                                        <f:selectItem itemLabel="Proveedor" itemValue="2" />
+                                        <f:selectItem itemLabel="Option 3" itemValue="3" />
+                                    </p:selectOneMenu>
 
-                            </p:panelGrid>
-                            <div class="card">
-                                <div class="ui-g">
-                                    <div class="ui-grid-col-2">
-                                        <p:commandButton actionListener="#{usuarioBeanMB.insertar()}" id="agregar" value="Agregar Usuario"  ajax="false" />
-                                        
+                                </h:panelGrid>
+                                <div class="card">
+                                    <div class="ui-g">
+                                        <div class="ui-grid-col-2">
+                                            <p:commandButton actionListener="#{usuarioBeanMB.insertar()}" id="agregar" value="Agregar Usuario"  ajax="false" />
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                                
+                            </p:panel>   
                         </div>
 
                     </div>

@@ -1,0 +1,145 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Crear Personas</ui:define>
+    <ui:define name="content">
+        <div style="height: 1000px; overflow: auto"> 
+            <h:form id ="formInsertar"> 
+                <script type="text/javascript">
+                    function limpiarForm()
+                    {
+                        document.getElementById("formInsertar").reset();
+                    }
+                </script>
+                <p:wizard flowListener="#{personaBeanMB.onFlowProcess}">
+                    <p:tab id="principal" title="Basicos">
+                        <p:panel header="Datos Basicos">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <p:outputLabel value="Nombres: " title="Nombre de la Persona"/>
+                                <p:inputText value="#{personaBeanMB.persona.nombre}" maxlength="15" style ="width:200px" />
+
+                                <p:outputLabel value="Apellidos: "/>
+                                <p:inputText value="#{personaBeanMB.persona.apellido}" maxlength="20" style ="width:200px"/>
+
+                                <p:outputLabel value="Pais: "/>
+                                <p:selectOneMenu id="pais" value="#{personaBeanMB.persona.codPais}" style="width:200px" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItem itemLabel="Seleccionar Pais" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItems value="#{paisBeanMB.paises}"
+                                                   var="pa"
+                                                   itemLabel="#{pa.descripcion}"
+                                                   itemValue="#{pa}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Tipo documento: "/>
+                                <p:selectOneMenu id="tipoIdent" value="#{personaBeanMB.identificacion.codIdent}" style="width:200px" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItem itemLabel="Seleccionar Tipo" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItems value="#{tipoIdentBeanMB.tipos}"
+                                                   var="t"
+                                                   itemLabel="#{t.descripcion}"
+                                                   itemValue="#{t}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Numero Documento: " />
+                                <p:inputText value="#{personaBeanMB.identificacion.numero}" style="width:200px"/>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="fisica" title="Persona Física">
+                        <p:panel header="Detalle de la Persona Física">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <p:outputLabel value="Genero: "/>
+                                <p:selectOneMenu id="genero" value="#{personaBeanMB.persona.sexo}" style="width:200px">
+                                    <f:selectItem itemLabel="Seleccionar Sexo: " itemValue="#{null}" />
+                                    <f:selectItem itemLabel="1-Hombre" itemValue="H" />
+                                    <f:selectItem itemLabel="2-Mujer" itemValue="M" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Fecha de Nacimiento: "/>
+                                <p:calendar id="mask" value="#{personaBeanMB.persona.fecNacimiento}" pattern="dd/MM/yyyy" mask="true" style ="width:200px" />
+
+                                <h:outputText value="City: " />
+                                <p:inputText value="#{userWizard.user.city}" />
+
+                                <h:outputText value="Skip to last: " />
+                                <h:selectBooleanCheckbox value="#{userWizard.skip}" />
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="cliente" title="Cliente">
+                        <p:panel header="Detalles del Cliente">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <p:outputLabel value="Tipo de Cliente: "/>
+                                <p:selectOneMenu id="tipo" value="#{personaBeanMB.cliente.tipoCliente}" style="width:200px" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItem itemLabel="Seleccionar Tipo" itemValue="#{null}" />
+                                    <f:selectItem itemLabel="1-Normal" itemValue="1" />
+                                    <f:selectItem itemLabel="2-Especial" itemValue="2" />
+                                    <f:selectItem itemLabel="3-VIP" itemValue="3" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Estado Actual: "/>
+                                <p:selectOneMenu id="estado" value="#{personaBeanMB.cliente.estado}" style="width:200px" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItem itemLabel="Seleccionar Estado" itemValue="" />
+                                    <f:selectItem itemLabel="1-Activo" itemValue="1" />
+                                    <f:selectItem itemLabel="2-Inactivo" itemValue="2" />
+                                    <f:selectItem itemLabel="3-Suspendido" itemValue="3" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Numero telefono: "/>
+                                <p:inputText value="#{personaBeanMB.telefono.numero}" style="width:200px"/>
+
+                                <p:outputLabel value="Direccion: " />
+                                <p:inputText value="#{personaBeanMB.direccion.detalle}" style="width:200px" />
+
+                                <p:outputLabel value="Es Proveedor? : "/>
+                                <p:selectBooleanCheckbox value="#{personaBeanMB.esProv}" style="width:200px">
+                                    <p:ajax update=":formInsertar:console"/>
+                                </p:selectBooleanCheckbox>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="proveedor" title="Proveedor">
+                        <p:panel header="Estado Proveedor">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <p:outputLabel value="Estado Proveedor: "/>
+                                <p:selectOneMenu id="console" value="#{personaBeanMB.proveedor.estado}" style="width:200px" disabled="#{personaBeanMB.esProv == false}">
+                                    <f:selectItem itemLabel="Seleccionar Estado: " itemValue="#{null}" />
+                                    <f:selectItem itemLabel="1-Activo" itemValue="A" />
+                                    <f:selectItem itemLabel="2-Inactivo" itemValue="I" />
+                                </p:selectOneMenu>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirm" title="Confirmación">
+                        <p:panel header="Confirmación">
+                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Nombre: " />
+                                    <h:outputText value="#{personaBeanMB.persona.nombre}" styleClass="outputLabel"/>
+                                </h:panelGrid>
+
+                            </h:panelGrid>
+                            <p:commandButton actionListener="#{personaBeanMB.insertar()}" value="Agregar" update="growl" oncomplete="limpiarForm()" process="@this"/> 
+
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

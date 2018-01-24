@@ -1,0 +1,129 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="title">Crear Usuarios</ui:define>
+    <ui:define name="content">
+        <h:form id = "formAltaUsuario">
+
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card">
+                            <h1>Datos Básicos</h1>
+                            <p:panel header="ALTA DE USUARIO" >
+                                <h:panelGrid columns="4" cellpadding="5" columnClasses="ui-grid-col-5,ui-grid-col-5"  styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
+
+                                    <p:outputLabel for="nombre" value="Nombre: " title="Nombre: "/>
+                                    <p:inputText id="nombre" value="#{usuarioBeanMB.persona.nombre}" maxlength="15" style ="width:200px" required="true" >
+                                        <p:clientValidator />
+                                    </p:inputText>
+                                    <p:message for="nombre" display="icon" />
+                                    <h:outputText value="#{usuarioBeanMB.text}" />
+
+                                    <p:outputLabel  for="apellido" value="Apellido: "/>
+                                    <p:inputText id ="apellido" value="#{usuarioBeanMB.persona.apellido}" maxlength="20" style ="width:200px" required="true">
+                                        <p:clientValidator />
+                                    </p:inputText>
+                                    <p:message for="apellido" display="icon" />
+                                    <h:outputText value="#{usuarioBeanMB.text}" />
+
+                                    <p:outputLabel for ="genero" value="Genero: "/>
+                                    <p:selectOneMenu id="genero" value="#{usuarioBeanMB.persona.sexo}" style="width:200px" required="true">
+                                        <f:selectItem itemLabel="Seleccionar Sexo: " itemValue="#{null}" />
+                                        <f:selectItem itemLabel="1-Hombre" itemValue="H" />
+                                        <f:selectItem itemLabel="2-Mujer" itemValue="M" />
+                                        <p:clientValidator />
+                                    </p:selectOneMenu>
+                                    <p:message for="genero" display="icon" />
+                                    <h:outputText value="#{usuarioBeanMB.text}" />
+
+
+                                    <p:outputLabel for ="mask" value="Fecha de Nacimiento: "/>
+                                    <p:calendar id="mask" value="#{usuarioBeanMB.persona.fecNacimiento}" pattern="dd/MM/yyyy" mask="true" style ="width:200px" required="true">
+                                        <p:clientValidator />
+                                    </p:calendar>
+                                    <p:message for="mask" display="icon" />
+                                    <h:outputText value="#{usuarioBeanMB.text}" />
+
+
+                                    <p:outputLabel for="pais" value="Pais: "/>
+                                    <p:selectOneMenu id="pais" value="#{usuarioBeanMB.persona.codPais}" style="width:200px" converter="omnifaces.SelectItemsConverter" required="true">
+                                        <f:selectItem itemLabel="Seleccionar Pais" itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{paisBeanMB.paises}"
+                                                       var="pa"
+                                                       itemLabel="#{pa.descripcion}"
+                                                       itemValue="#{pa}"/>
+                                        <p:clientValidator />
+                                    </p:selectOneMenu>
+                                    <p:message for="pais" display="icon" />
+                                    <h:outputText value="#{usuarioBeanMB.text}" />
+
+                                    <p:outputLabel for= "usuario" value="Usuario :" />
+                                    <p:inputText id ="usuario" value="#{usuarioBeanMB.user.nomUser}" style="width:200px" required="true">
+                                        <p:clientValidator />
+                                    </p:inputText>
+                                    <p:message for="usuario" display="icon" />
+                                    <h:outputText value="#{usuarioBeanMB.text}" />
+
+                                    <p:outputLabel for="password" value="Contraseña : " />
+                                    <p:password id="password" value="#{usuarioBeanMB.user.password}" style="width:200px" required="true">
+                                        <p:clientValidator />
+                                    </p:password>
+                                    <p:message for="password" display="icon" />
+                                    <h:outputText value="#{usuarioBeanMB.text}" />
+
+                                    <p:outputLabel for="tipoU" value="Tipo de Usuario: " />
+                                    <p:inputText id="tipoU" value="#{usuarioBeanMB.user.tipoUsuario}" style="width:200px" required="true">
+                                        <p:clientValidator />
+                                    </p:inputText>
+                                    <p:message for="tipoU" display="icon" />
+                                    <h:outputText value="#{usuarioBeanMB.text}" />
+
+                                    <p:outputLabel for="evento" value="Evento: "/>
+                                    <p:selectOneMenu id="evento" 
+                                                     value="#{usuarioBeanMB.eventoSelected}" 
+                                                     style="width:200px" 
+                                                     converter="omnifaces.SelectItemsConverter" 
+                                                     required="true">
+                                        <p:ajax event="change" update="sector" />
+                                        <f:selectItem itemLabel="Seleccionar Evento del Usuario" itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{usuarioBeanMB.eventos}"
+                                                       var="pa"
+                                                       itemLabel="#{pa.descripcion}"
+                                                       itemValue="#{pa}"/>
+                                        <p:clientValidator />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="sector" value="Sector: "/>
+                                    <p:selectOneMenu id="sector" 
+                                                     value="#{usuarioBeanMB.sectorSelected}" 
+                                                     style="width:200px" 
+                                                     converter="omnifaces.SelectItemsConverter" 
+                                                     required="true">
+                                        <f:selectItem itemLabel="Seleccionar el Sector" itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{usuarioBeanMB.eventoSelected.sectorList}"
+                                                       var="pa"
+                                                       itemLabel="#{pa.descripcion}"
+                                                       itemValue="#{pa}"/>
+                                        <p:clientValidator />
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+                                <div class="card">
+                                    <div class="ui-g">
+                                        <div class="ui-grid-col-2">
+                                            <p:commandButton actionListener="#{usuarioBeanMB.insertar}" ajax ="false" icon="ui-icon-check" value="Agregar" validateClient="true" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </p:panel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

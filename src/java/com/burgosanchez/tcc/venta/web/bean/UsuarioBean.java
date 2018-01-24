@@ -7,12 +7,14 @@ package com.burgosanchez.tcc.venta.web.bean;
 
 import com.burgosanchez.tcc.venta.ejb.EventoCab;
 import com.burgosanchez.tcc.venta.ejb.Persona;
+import com.burgosanchez.tcc.venta.ejb.Sector;
 import com.burgosanchez.tcc.venta.ejb.Usuario;
 import com.burgosanchez.tcc.venta.ejb.UsuarioPK;
 import com.burgosanchez.tcc.venta.jpa.PersonaFacade;
 import com.burgosanchez.tcc.venta.jpa.UsuarioFacade;
 import com.burgosanchez.tcc.venta.jpa.BasicosFacade;
 import com.burgosanchez.tcc.venta.jpa.EventoCabFacade;
+import com.burgosanchez.tcc.venta.jpa.SectorFacade;
 import com.burgosanchez.tcc.venta.web.common.Messages;
 import com.burgosanchez.tcc.venta.web.common.MsgUtil;
 import java.io.Serializable;
@@ -43,6 +45,8 @@ public class UsuarioBean implements Serializable {
     private BasicosFacade basicosFacade;
     @Inject
     private EventoCabFacade eventoFacade;
+    @Inject
+    private SectorFacade sectorFacade;
 
     private Persona persona;
     private Usuario user;
@@ -51,6 +55,8 @@ public class UsuarioBean implements Serializable {
 
     private List<EventoCab> eventos;
     private EventoCab eventoSelected;
+    private List<Sector> sectores;
+    private Sector sectorSelected;
 
     private String usuarioNombre;
 
@@ -139,6 +145,24 @@ public class UsuarioBean implements Serializable {
         this.eventoSelected = eventoSelected;
     }
 
+    public List<Sector> getSectores() {
+        return sectores;
+    }
+
+    public void setSectores(List<Sector> sectores) {
+        this.sectores = sectores;
+    }
+
+    public Sector getSectorSelected() {
+        return sectorSelected;
+    }
+
+    public void setSectorSelected(Sector sectorSelected) {
+        this.sectorSelected = sectorSelected;
+    }
+    
+    
+
 //<editor-fold>
 //region Sesiones
     public String validateUsernamePassword() {
@@ -191,7 +215,7 @@ public class UsuarioBean implements Serializable {
             user.setUsuarioPK(uPK);
             personaFacade.create(persona);
             usuarioFacade.create(user);
-            usuarioFacade.insertarUsuarioEvento(user, eventoSelected);
+            usuarioFacade.insertarUsuarioEvento(user, eventoSelected,sectorSelected);
             Messages.growlMessageInfo("Se creó exitosamente el usuario", null);
             limpiarCampos();
 

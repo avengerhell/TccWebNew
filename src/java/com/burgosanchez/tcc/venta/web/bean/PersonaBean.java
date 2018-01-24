@@ -33,6 +33,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import org.primefaces.event.FlowEvent;
 
 /**
  *
@@ -65,6 +66,8 @@ public class PersonaBean implements Serializable {
     private Proveedor proveedor;
     private String docu;
     private String nom;
+
+    private boolean skip;
 
     private List<Persona> personas;
 
@@ -158,6 +161,14 @@ public class PersonaBean implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public boolean isSkip() {
+        return skip;
+    }
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
     }
 
     public void blanqueo() {
@@ -282,5 +293,21 @@ System.out.println(contraints.getRootBeanClass().getSimpleName()+
         context.addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,
         "Insertado Correctamente",
         ""));*/    }
+
+    public String onFlowProcess(FlowEvent event) {
+        if (!identificacion.getCodIdent().equals("CI")) {
+            return "cliente";
+        } else if (cliente.getTipoCliente() != null) {
+            if (esProv) {
+                esProv = false;   //reset in case user goes back
+                return "proveedor";
+            }else{
+                return "confirm";
+            }
+        } else {
+            return event.getNewStep();
+        }
+
+    }
 
 }
