@@ -110,7 +110,7 @@
                         <h:outputText value='#{sec.descripcion}'/>
                     </p:column>
                     <p:column headerText='Ilimitado'>
-                        <h:outputText value='#{sec.ilimitado}'/>
+                        <h:outputText value='#{sec.ilimitado eq 'S' ? 'SI'  : 'NO' }'/>
                     </p:column>
                     <p:column headerText='Cantidad'>
                         <h:outputText value='#{sec.cantidad}'/>
@@ -182,7 +182,7 @@
                         </h:outputText>
                     </p:column>
                     <p:column headerText='Disponible'>
-                        <h:outputText value='#{hor.disponible}'></h:outputText>
+                        <h:outputText value='#{hor.disponible eq 'S' ? 'SI' : 'NO'}'></h:outputText>
                     </p:column>
                     <p:column headerText="Modificar">
                         <p:commandButton value="Modificar" oncomplete="PF('digModHorario').show()" update="@([id$=formModHor])">
@@ -327,7 +327,7 @@
                     <p:outputLabel  value="Sector " />
                     <p:inputText id="parO" value="#{listaPrecioBeanMB.lista.sector.descripcion}" style="width:200px" readonly="true"/>
 
-                    <p:outputLabel value="Ilimitado: "/>
+                    <p:outputLabel value="Costo: "/>
                     <p:inputText value="#{listaPrecioBeanMB.lista.valor}"/>
 
                     <p:outputLabel value="Fecha inicio: "/>
