@@ -37,6 +37,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import org.omnifaces.el.functions.Dates;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -316,7 +317,7 @@ System.out.println(contraints.getRootBeanClass().getSimpleName()+
 
     }
     
-    public void calculaFecha(){
+    public void calculaFecha(SelectEvent event){
        int years =  Dates.yearsBetween(persona.getFecNacimiento(), new Date());
        if (years < 18){
            Messages.growlMessageError("La persona debe ser mayor a 18 años", null);

@@ -64,7 +64,7 @@
 
                                 <p:outputLabel value="Fecha de Nacimiento: "/>
                                 <p:calendar id="mask" value="#{personaBeanMB.persona.fecNacimiento}" pattern="dd/MM/yyyy" mask="true" style ="width:200px">
-                                    <p:ajax event="change" listener="#{personaBeanMB.calculaFecha()}"/>
+                                    <p:ajax event="dateSelect" listener="#{personaBeanMB.calculaFecha}"/>
                                 </p:calendar>
 
                             </h:panelGrid>
