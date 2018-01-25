@@ -143,8 +143,8 @@ public class HorarioBean implements Serializable {
     public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
-    
-    public void obtenerHorarios(String cod){
+
+    public void obtenerHorarios(String cod) {
         horas = horarioFacade.obtenerHorarioEven(cod);
     }
 
@@ -155,18 +155,21 @@ public class HorarioBean implements Serializable {
     public void setApertura(Date apertura) {
         this.apertura = apertura;
     }
-    
-    
 
     public void insertar() {
-        horaPK.setCodEvento(event);
-        horaPK.setCodHorario(codHora);
-        codHora = String.valueOf(horarioFacade.obtenerSecuenciaVal());
-        hora.setHorarioPK(horaPK);
-        hora.setApertura(apertura);
-        horarioFacade.create(hora);
-        hora = new Horario();
-        Messages.growlMessageInfo("Se insertó el horario", null);
+        int k = hora.getApertura().compareTo(hora.getFecFin());
+        if (k <= 0) {
+            horaPK.setCodEvento(event);
+            horaPK.setCodHorario(codHora);
+            codHora = String.valueOf(horarioFacade.obtenerSecuenciaVal());
+            hora.setHorarioPK(horaPK);
+            hora.setApertura(apertura);
+            horarioFacade.create(hora);
+            hora = new Horario();
+            Messages.growlMessageInfo("Se insertó el horario", null);
+        } else {
+            Messages.growlMessageError("La fecha de fin no puede ser menor a la de inicio", null);
+        }
     }
 
     public void modificar() {
@@ -182,18 +185,23 @@ public class HorarioBean implements Serializable {
     }
 
     public void horarios() {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            SimpleDateFormat formatH = new SimpleDateFormat("HH:mm");
-            horarioFacade.generaHorarios2(event,
-                    String.valueOf(formatH.format(hora_desde)),
-                    String.valueOf(formatH.format(hora_hasta)),
-                    String.valueOf(format.format(fecha_desde)),
-                    String.valueOf(format.format(fecha_hasta)),
-                    String.valueOf(format.format(apertura)));
-            Messages.growlMessageInfo("Se crearon los horarios para el evento seleccionado", null);
-        } catch (Exception e) {
-            System.out.println(e);
+        int k = fecha_desde.compareTo(fecha_hasta);
+        if (k <= 0) {
+            try {
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatH = new SimpleDateFormat("HH:mm");
+                horarioFacade.generaHorarios2(event,
+                        String.valueOf(formatH.format(hora_desde)),
+                        String.valueOf(formatH.format(hora_hasta)),
+                        String.valueOf(format.format(fecha_desde)),
+                        String.valueOf(format.format(fecha_hasta)),
+                        String.valueOf(format.format(apertura)));
+                Messages.growlMessageInfo("Se crearon los horarios para el evento seleccionado", null);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            Messages.growlMessageError("La fecha de fin no puede ser menor a la de inicio", null);
         }
     }
 }

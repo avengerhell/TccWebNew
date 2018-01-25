@@ -48,7 +48,7 @@ public class EventoCabBean implements Serializable {
     List<EventoCab> eventos;
     private String nombre;
     private String proveedor;
-    
+
     @Resource(name = "tccResource")
     private DataSource dcorsOraResource;
 
@@ -114,10 +114,15 @@ public class EventoCabBean implements Serializable {
     }
 
     public void insertar() {
-        evento.setCodEvento(String.valueOf(eventoFacade.obtenerSecuenciaVal()));
-        eventoFacade.create(evento);
-        Messages.growlMessageInfo("Se creó exitosamente el evento", null);
-        //evento = new EventoCab();
+        int k = evento.getFecInicio().compareTo(evento.getFecFin());
+        if (k <= 0) {
+            evento.setCodEvento(String.valueOf(eventoFacade.obtenerSecuenciaVal()));
+            eventoFacade.create(evento);
+            Messages.growlMessageInfo("Se creó exitosamente el evento", null);
+            //evento = new EventoCab();
+        } else {
+            Messages.growlMessageError("La fecha de fin no puede ser menor a la de inicio", null);
+        }
     }
 
     public void modificar() {
@@ -157,7 +162,6 @@ public class EventoCabBean implements Serializable {
         return mensaje;
     }
      */
-
     public void generarReporteEntradas(ActionEvent actionEvent) throws JRException, SQLException {
         try {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -167,7 +171,7 @@ public class EventoCabBean implements Serializable {
             String u = user.getNomUser();
             List<EventoCab> eve = eventoFacade.obtenerEventosUsuario(u);
             parametros.put("p_cod_evento", eve.get(0).getCodEvento());
-            
+
             File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("reportes" + File.separator + "reporteDeEntradas.jasper"));
             System.out.println(jasper.getPath());
             String pr = jasper.getPath();
