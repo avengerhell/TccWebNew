@@ -14,16 +14,17 @@
                         document.getElementById("formInsertar").reset();
                     }
                 </script>
+                <p:growl id="growl" showDetail="true" sticky="false" />
                 <p:wizard flowListener="#{personaBeanMB.onFlowProcess}">
                     <p:tab id="principal" title="Basicos">
                         <p:panel header="Datos Basicos">
                             <p:messages />
                             <h:panelGrid columns="2" columnClasses="label, value">
                                 <p:outputLabel value="Nombres: " title="Nombre de la Persona"/>
-                                <p:inputText value="#{personaBeanMB.persona.nombre}" maxlength="15" style ="width:200px" />
+                                <p:inputText value="#{personaBeanMB.persona.nombre}" maxlength="60" style ="width:200px" />
 
                                 <p:outputLabel value="Apellidos: "/>
-                                <p:inputText value="#{personaBeanMB.persona.apellido}" maxlength="20" style ="width:200px"/>
+                                <p:inputText value="#{personaBeanMB.persona.apellido}" maxlength="60" style ="width:200px"/>
 
                                 <p:outputLabel value="Pais: "/>
                                 <p:selectOneMenu id="pais" value="#{personaBeanMB.persona.codPais}" style="width:200px" converter="omnifaces.SelectItemsConverter">
@@ -62,13 +63,10 @@
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="Fecha de Nacimiento: "/>
-                                <p:calendar id="mask" value="#{personaBeanMB.persona.fecNacimiento}" pattern="dd/MM/yyyy" mask="true" style ="width:200px" />
+                                <p:calendar id="mask" value="#{personaBeanMB.persona.fecNacimiento}" pattern="dd/MM/yyyy" mask="true" style ="width:200px">
+                                    <p:ajax event="change" listener="#{personaBeanMB.calculaFecha()}"/>
+                                </p:calendar>
 
-                                <h:outputText value="City: " />
-                                <p:inputText value="#{userWizard.user.city}" />
-
-                                <h:outputText value="Skip to last: " />
-                                <h:selectBooleanCheckbox value="#{userWizard.skip}" />
                             </h:panelGrid>
                         </p:panel>
                     </p:tab>
@@ -98,11 +96,9 @@
 
                                 <p:outputLabel value="Direccion: " />
                                 <p:inputText value="#{personaBeanMB.direccion.detalle}" style="width:200px" />
-
-                                <p:outputLabel value="Es Proveedor? : "/>
-                                <p:selectBooleanCheckbox value="#{personaBeanMB.esProv}" style="width:200px">
-                                    <p:ajax update=":formInsertar:console"/>
-                                </p:selectBooleanCheckbox>
+                                <p:outputLabel value="Es Proveedor?: " />
+                                <h:selectBooleanCheckbox value="#{personaBeanMB.skip}" />
+                                <!--<p:ajax update=":formInsertar:console"/>-->
                             </h:panelGrid>
                         </p:panel>
                     </p:tab>
@@ -112,7 +108,8 @@
                             <p:messages />
                             <h:panelGrid columns="2" columnClasses="label, value">
                                 <p:outputLabel value="Estado Proveedor: "/>
-                                <p:selectOneMenu id="console" value="#{personaBeanMB.proveedor.estado}" style="width:200px" disabled="#{personaBeanMB.esProv == false}">
+                                <!--disabled="#personaBeanMB.esProv == false}"-->
+                                <p:selectOneMenu id="console" value="#{personaBeanMB.proveedor.estado}" style="width:200px" >
                                     <f:selectItem itemLabel="Seleccionar Estado: " itemValue="#{null}" />
                                     <f:selectItem itemLabel="1-Activo" itemValue="A" />
                                     <f:selectItem itemLabel="2-Inactivo" itemValue="I" />
@@ -124,7 +121,7 @@
 
                     <p:tab id="confirm" title="Confirmación">
                         <p:panel header="Confirmación">
-                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid id="confirmation" columns="2">
                                 <h:panelGrid columns="2" columnClasses="label, value">
                                     <h:outputText value="Nombre: " />
                                     <h:outputText value="#{personaBeanMB.persona.nombre}" styleClass="outputLabel"/>

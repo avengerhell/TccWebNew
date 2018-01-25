@@ -64,9 +64,9 @@
             <p:commandButton value="Localidad" oncomplete="PF('diginsertarLoca').show()" update=":formAddLocal">
                 <f:setPropertyActionListener target="#{localidadEventoBeanMB.event}" value="#{eventoCabBeanMB.evento.codEvento}"/>
             </p:commandButton>
-            <!--<p:commandButton value="Condiciones" oncomplete="PF('diginsertarCon').show()" update=":formAddCondi">
-                <f:setPropertyActionListener target="#condicionEventoBeanMB.evento}" value="#eventoCabBeanMB.evento.codEvento}"/>
-            </p:commandButton>                    -->
+            <p:commandButton value="Condiciones" oncomplete="PF('diginsertarCon').show()" update=":formAddCondi">
+                <f:setPropertyActionListener target="#{condicionEventoBeanMB.evento}" value="#{eventoCabBeanMB.evento.codEvento}"/>
+            </p:commandButton>                    
 
         </h:form>
 
@@ -123,7 +123,7 @@
                     <p:inputText id="parO" value="#{condicionEventoBeanMB.evento}" style="width:200px" readonly="true"/>
                     <p:outputLabel value="Condicion: " />
                     <p:selectOneMenu id="prov" value="#{condicionEventoBeanMB.codCond}" style="width:200px" converter="omnifaces.SelectItemsConverter">
-                        <f:selectItem itemLabel="Seleccionar Localidad" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItem itemLabel="Seleccionar Condicion" itemValue="#{null}" noSelectionOption="true"/>
                         <f:selectItems value="#{condicionBeanMB.condiciones}"
                                        var="con"
                                        itemLabel="#{con.descripcion}"
@@ -132,8 +132,7 @@
                     <p:outputLabel  value="Valor: " />
                     <p:inputText id="valo" value="#{condicionEventoBeanMB.condicion.valor}" style="width:200px" />
                 </p:panelGrid>
-                <p:commandButton value="Insertar Local" actionListener="#{condicionEventoBeanMB.insertar()}"
-                                 oncomplete="PF('diginsertarCon').hide();"
+                <p:commandButton value="Insertar Condicion" actionListener="#{condicionEventoBeanMB.insertar()}"
                                  update="growl4"/>
                 <p:commandButton value="Cancelar" onclick="inser.hide();"/> 
             </h:form>

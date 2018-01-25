@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteDeEntradas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fce4d65e-19cb-4330-b9c8-0139bae31731">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_cod_evento" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[Select ev.NOMBRE      As nom_evento,
+       ev.FEC_INICIO  As inicio_evento,
+       decode (ev.ESTADO, 'A','ACTIVO','R','REALIZADO','CANCELADO')   As estado_evento,
+       per.NOMBRE     As nom_proveedor,
+       te.DESCRIPCION As tipo_evento,
+       e.NUMERO       As num_entrada,
+       decode(e.ESTADO,'A', 'ACTIVO','C','UTILIZADO','R','REVERSADO')       As estado_Entrada,
+       s.DESCRIPCION  As sector,
+       lp.VALOR       As precio,
+       h.fec_inicio   As hora_inicio
+  From ENTRADA e
+       Inner Join EVENTO_CAB ev
+               On ev.COD_EVENTO = e.COD_EVENTO
+       Inner Join PROVEEDOR p
+               On p.COD_PROVEEDOR = ev.COD_PROVEEDOR
+       Inner Join PERSONA per
+               On per.COD_PERSONA = p.COD_PERSONA
+       INNER Join TIPO_EVENTO te
+               On ev.cod_tipo = te.COD_TIPO
+       INNER Join HORARIO h
+               On e.COD_HORARIO = h.COD_HORARIO
+              And e.COD_EVENTO = h.COD_EVENTO
+       INNER Join LISTA_PRECIO lp
+               On lp.COD_LISTA = e.COD_LISTA
+              And lp.COD_EVENTO = e.COD_EVENTO
+              And lp.COD_SECTOR = e.COD_SECTOR
+       Inner Join SECTOR s
+               On e.COD_SECTOR = s.COD_SECTOR
+              And e.COD_EVENTO = s.COD_EVENTO
+WHERE e.cod_evento = $P{p_cod_evento}]]>
+	</queryString>
+	<field name="NOM_EVENTO" class="java.lang.String"/>
+	<field name="INICIO_EVENTO" class="java.sql.Timestamp"/>
+	<field name="ESTADO_EVENTO" class="java.lang.String"/>
+	<field name="NOM_PROVEEDOR" class="java.lang.String"/>
+	<field name="TIPO_EVENTO" class="java.lang.String"/>
+	<field name="NUM_ENTRADA" class="java.math.BigDecimal"/>
+	<field name="ESTADO_ENTRADA" class="java.lang.String"/>
+	<field name="SECTOR" class="java.lang.String"/>
+	<field name="PRECIO" class="java.math.BigDecimal"/>
+	<field name="HORA_INICIO" class="java.sql.Timestamp"/>
+	<variable name="tot_valor" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{PRECIO}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="NOM_EVENTO">
+		<groupExpression><![CDATA[$F{NOM_EVENTO}]]></groupExpression>
+	</group>
+	<group name="SECTOR">
+		<groupExpression><![CDATA[$F{SECTOR}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<textField>
+				<reportElement x="102" y="24" width="100" height="20" uuid="01bdf067-57cf-4042-a90e-945c19233344"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOM_EVENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="102" y="44" width="100" height="20" uuid="77fb2612-d581-46c8-91f0-1077fc3a0ed6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INICIO_EVENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="24" width="100" height="20" uuid="a9ff0933-b5ce-431e-b1fa-1309e4f71dbf"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ESTADO_EVENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="44" width="100" height="20" uuid="522cad37-f45c-4136-b430-6512d1f8f395"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPO_EVENTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="24" width="100" height="20" uuid="ef060bbd-c803-410e-bd3d-76d2e045913b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="44" width="100" height="20" uuid="372b5e59-3b75-4c16-86e5-c184a6a2d6ea"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Evento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="24" width="100" height="20" uuid="75cd9e11-06d5-432c-91f4-3b652deda403"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="44" width="100" height="20" uuid="4073841e-bd9c-4cc3-9164-a73fbb7de457"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Evento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="259" height="20" uuid="a99b42d3-8f9a-401d-933f-4af4eda27ecf"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE ENTRADAS VENDIDAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="100" height="20" uuid="c567f03b-097b-4070-88f8-622172443d41"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="1" width="100" height="20" uuid="e10ecca5-3827-4c66-8c02-7344854d83a1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="1" width="132" height="20" uuid="e1f7b8d2-c430-4948-9ca7-7194bf27ca69"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sector]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="97b80dad-338e-4898-92d2-bd7ae1e5c118"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="21" width="553" height="1" uuid="11674163-34f1-485b-952f-06d4140ba504"/>
+			</line>
+			<staticText>
+				<reportElement x="332" y="0" width="123" height="20" uuid="3d307b58-28f0-4d40-8ceb-00b551a0483c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora inicio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="cb418394-ccef-4d88-9867-487a0331ef8f"/>
+				<textFieldExpression><![CDATA[$F{NUM_ENTRADA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="3f97c66e-d99d-4c1c-b6b7-f5b99deef8fb"/>
+				<textFieldExpression><![CDATA[$F{ESTADO_ENTRADA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="132" height="20" uuid="d62fdb75-e49d-4693-a85c-e6a449138c4c"/>
+				<textFieldExpression><![CDATA[$F{SECTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="a6530395-7775-4c88-847e-d604bb453de6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{PRECIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="0" width="123" height="20" uuid="023210aa-db9c-49ca-bc47-a67486f00594"/>
+				<textFieldExpression><![CDATA[$F{HORA_INICIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="332" y="2" width="115" height="20" uuid="4f32cd26-8341-412b-87ac-779d8592829f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Recaudado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="447" y="2" width="108" height="20" uuid="6cb807b9-2aeb-4d48-bbf9-e94c7d128bd1"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_valor}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="455" y="0" width="100" height="1" uuid="d55614b6-a45d-4d3e-a010-2c6ee05d6861"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

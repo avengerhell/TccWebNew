@@ -40,6 +40,9 @@ public class CondicioonBean implements Serializable{
     }
 
     public List<Condicion> getCondiciones() {
+        if(condiciones == null){
+            condiciones = condicionFacade.findAll();
+        }
         return condiciones;
     }
 

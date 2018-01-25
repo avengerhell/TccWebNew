@@ -34,6 +34,7 @@ public class ListaPrecioBean implements Serializable {
     List<ListaPrecio> listas;
     List<Sector> sectores;
     private ListaPrecioPK listaPK;
+    String evento;
 
     public ListaPrecioBean() {
         lista = new ListaPrecio();
@@ -75,13 +76,19 @@ public class ListaPrecioBean implements Serializable {
 
     public void insertar() {
         listaPK.setCodLista(String.valueOf(listaFacade.obtenerSecuenciaVal()));
-        listaPK.setCodEvento(lista.getEventoCab().getCodEvento());
+        if (evento != null) {
+            listaPK.setCodEvento(evento);
+        } else {
+            listaPK.setCodEvento(lista.getEventoCab().getCodEvento());
+        }
         listaPK.setCodSector(lista.getSector().getSectorPK().getCodSector());
         lista.setListaPrecioPK(listaPK);
         listaFacade.create(lista);
+        evento = lista.getEventoCab().getCodEvento();
         lista = new ListaPrecio();
+
         Messages.growlMessageInfo("Ingresado Correctamente", null);
-        
+
     }
 
     public void modificar() {
@@ -97,7 +104,8 @@ public class ListaPrecioBean implements Serializable {
     }
 
     public void onEventChange() {
-        if (lista.getEventoCab() != null && !lista.getEventoCab().equals(""))
+        if (lista.getEventoCab() != null && !lista.getEventoCab().equals("")) {
             sectores = (List<Sector>) sectorFacade.obtenerSectorEven(lista.getEventoCab().getCodEvento());
+        }
     }
 }

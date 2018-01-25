@@ -17,9 +17,11 @@ import com.burgosanchez.tcc.venta.jpa.IdentPersonaFacade;
 import com.burgosanchez.tcc.venta.jpa.PersonaFacade;
 import com.burgosanchez.tcc.venta.jpa.ProveedorFacade;
 import com.burgosanchez.tcc.venta.jpa.TelPersonaFacade;
+import com.burgosanchez.tcc.venta.web.common.Messages;
 import com.burgosanchez.tcc.venta.web.common.MsgUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import org.omnifaces.el.functions.Dates;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -292,14 +295,17 @@ System.out.println(contraints.getRootBeanClass().getSimpleName()+
         /*FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,
         "Insertado Correctamente",
-        ""));*/    }
+        ""));*/    
+    }
 
     public String onFlowProcess(FlowEvent event) {
-        if (!identificacion.getCodIdent().equals("CI")) {
+        System.out.println("Nuevo paso " +event.getNewStep());
+        System.out.println("Viejo paso " +event.getOldStep());
+        if (!identificacion.getCodIdent().getCodIdent().equals("CI") && cliente.getTipoCliente() == null) {
             return "cliente";
         } else if (cliente.getTipoCliente() != null) {
-            if (esProv) {
-                esProv = false;   //reset in case user goes back
+            if (skip) {
+                skip = false;   //reset in case user goes back
                 return "proveedor";
             }else{
                 return "confirm";
@@ -308,6 +314,14 @@ System.out.println(contraints.getRootBeanClass().getSimpleName()+
             return event.getNewStep();
         }
 
+    }
+    
+    public void calculaFecha(){
+       int years =  Dates.yearsBetween(persona.getFecNacimiento(), new Date());
+       if (years < 18){
+           Messages.growlMessageError("La persona debe ser mayor a 18 años", null);
+           persona.setFecNacimiento(null);
+       }
     }
 
 }

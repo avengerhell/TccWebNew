@@ -31,31 +31,13 @@
                         <p:menuitem id="om_dashboard" value="Dashboard" icon="fa fa-home" outcome="/dashboard"/>
 
                         <p:submenu id="om_personas" label="Personas" icon="fa fa-users">
-                            <p:menuitem id="om_altaPersonas" value="Persona Fisica" icon="fa fa-plus" outcome="/PersonaFrame"  />
-                            <p:menuitem id="om_altaPersonasStep" value="Persona Fisica Step" icon="fa fa-plus" outcome="/PersonaFramesStep" />
+                            <p:menuitem id="om_altaPersonasStep" value="Crear Persona" icon="fa fa-plus" outcome="/PersonaFramesStep" />
                             <p:menuitem id="om_consultaPersona1" value="Personas" icon="fa fa-user" outcome="/personaConsulta" />
                         </p:submenu>
                         <p:submenu id="om_usuarios" label="Usuarios" icon="fa fa-user-circle">
                             <p:menuitem id="om_altaUsuario1" value="Alta Usuarios" icon="fa fa-plus" outcome="/UsuarioAlta" />
-                            <p:menuitem id="om_modifUsuario" value="Modificacion Usuarios" icon="fa fa-pencil-square-o" outcome="/modifUsuario" />
-                            <p:menuitem id="om_bajaUsuario" value="Baja Usuarios" icon="fa fa-trash" outcome="/bajaUsuario" />
                         </p:submenu>
-                        <p:submenu id="om_clientes" label="Clientes" icon="fa fa-users">
-                            <p:submenu id="om_altaClientes" label="Alta Clientes" icon="fa fa-plus">
-                                <p:menuitem id="om_altaClientesP" value="Persona Fisica" icon="fa fa-plus" outcome="altaClienteP"  />
-                                <p:menuitem id="om_altaClientesJ" value="Persona Juridica" icon="fa fa-plus" outcome="altaClienteJ"  />
-                            </p:submenu>
-                            <p:menuitem id="om_modifClientes" value="Modificacion Clientes" icon="fa fa-pencil-square-o" outcome="/modifCliente" />
-                            <p:menuitem id="om_bajaClientes" value="Baja Clientes" icon="fa fa-trash" outcome="/bajaCliente" />
-                        </p:submenu>
-                        <p:submenu id="om_proveedores" label="Proveedores" icon="fa fa-truck">
-                            <p:submenu id="om_altaProveedores" label="Alta Clientes" icon="fa fa-plus">
-                                <p:menuitem id="om_altaProveedoresP" value="Persona Fisica" icon="fa fa-plus" outcome="altaProveedorP"  />
-                                <p:menuitem id="om_altaProveedoresJ" value="Persona Juridica" icon="fa fa-plus" outcome="altaProveedorJ"  />
-                            </p:submenu>    
-                            <p:menuitem id="om_modifProveedores" value="Modificacion Proveedores" icon="fa fa-pencil-square-o" outcome="/modifProveedores" />
-                            <p:menuitem id="om_bajaProveedores" value="Baja Proveedores" icon="fa fa-columns" outcome="/bajaProveedores" />
-                        </p:submenu>
+                        
                         <p:submenu id="om_eventos" label="Eventos" icon="fa fa-ticket">
                             <p:menuitem id="om_crearEventos" value="Crear Evento" icon="fa fa-plus" outcome="/EventoCabFrame" />
                             <p:menuitem id="om_crearHorario" value="Crear Horario" icon="fa fa-clock-o" outcome="/HorarioFrame" />
@@ -64,8 +46,7 @@
                         </p:submenu>
                         <p:submenu id="om_consultas" label="Consultas" icon="fa fa-search-plus">
                             <p:menuitem id="om_consultaPersona" value="Personas" icon="fa fa-user" outcome="/personaConsulta" />
-                            <p:menuitem id="om_modifconsultas" value="Consultas" icon="fa fa-users" outcome="/modifUsuario" />
-                            <p:menuitem id="om_bajaconsultas" value="Consultas" icon="fa fa-columns" outcome="/bajaUsuario" />
+                            <p:menuitem id="om_modifconsultas" value="Eventos" icon="fa fa-ticket" outcome="/eventoConsulta" />
                         </p:submenu>
 
                     </po:menu>
