@@ -75,19 +75,28 @@ public class ListaPrecioBean implements Serializable {
     }
 
     public void insertar() {
-        listaPK.setCodLista(String.valueOf(listaFacade.obtenerSecuenciaVal()));
-        if (evento != null) {
-            listaPK.setCodEvento(evento);
-        } else {
-            listaPK.setCodEvento(lista.getEventoCab().getCodEvento());
-        }
-        listaPK.setCodSector(lista.getSector().getSectorPK().getCodSector());
-        lista.setListaPrecioPK(listaPK);
-        listaFacade.create(lista);
-        evento = lista.getEventoCab().getCodEvento();
-        lista = new ListaPrecio();
+        int k = lista.getFecInicio().compareTo(lista.getFecFin());
+        if (k <= 0) {
+            if (listaFacade.verificaLista(evento, lista.getSector().getSectorPK().getCodSector(), lista.getFecInicio(), lista.getFecFin())) {
+                listaPK.setCodLista(String.valueOf(listaFacade.obtenerSecuenciaVal()));
+                if (evento != null) {
+                    listaPK.setCodEvento(evento);
+                } else {
+                    listaPK.setCodEvento(lista.getEventoCab().getCodEvento());
+                }
+                listaPK.setCodSector(lista.getSector().getSectorPK().getCodSector());
+                lista.setListaPrecioPK(listaPK);
+                listaFacade.create(lista);
+                evento = lista.getEventoCab().getCodEvento();
+                lista = new ListaPrecio();
 
-        Messages.growlMessageInfo("Ingresado Correctamente", null);
+                Messages.growlMessageInfo("Ingresado Correctamente", null);
+            }else{
+                Messages.growlMessageError("Ya existe una lista en ese periodo de fechas ", null);
+            }
+        } else {
+            Messages.growlMessageError("La fecha de fin no puede ser menor a la de inicio", null);
+        }
 
     }
 

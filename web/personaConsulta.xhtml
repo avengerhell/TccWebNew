@@ -41,23 +41,23 @@
                              {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate ="10">
                     <p:column headerText='Nombre'>
-                        <h:outputText value='#{per.nombre}'/>
+                        <h:outputText value="#{per.nombre}"/>
                     </p:column>
                     <p:column headerText='Apellido'>
-                        <h:outputText value='#{per.apellido}'/>
+                        <h:outputText value="#{per.apellido}"/>
                     </p:column>
                     <p:column headerText='Sexo'>
                         <h:outputText value="#{per.sexo eq 'H' ? 'Hombre' : per.sexo eq 'M' ? 'Mujer' : ''}"/>
                     </p:column>
                     <p:column headerText='Fecha de nacimiento' id="service">
-                        <h:outputText value='#{per.fecNacimiento}'>
+                        <h:outputText value="#{per.fecNacimiento}">
                             <f:convertDateTime locale="es_PY"
                                                timeZone="#{config.timeZoneDefault()}"
                                                pattern="dd/MM/yyyy"/>
                         </h:outputText>
                     </p:column>
                     <p:column headerText='Nacionalidad'>
-                        <h:outputText value='#{per.codPais.descripcion}'/>
+                        <h:outputText value="#{per.codPais.descripcion}"/>
                     </p:column>
 
                     <p:column headerText='Cliente' style="width: 65px">
@@ -110,16 +110,16 @@
                         <h:outputText value='#{cli.codCliente}'/>
                     </p:column>
                     <p:column headerText='Persona'>
-                        <h:outputText value='#{cli.codPersona.nombre}'/>
+                        <h:outputText value="#{cli.codPersona.nombre}"/>
                     </p:column>
                     <p:column headerText='Tipo'>
-                        <h:outputText value='#{cli.tipoCliente eq '1' ? 'Normal' : cli.tipoCliente eq '2' ? 'Especial' : cli.tipoCliente eq '3' ? 'VIP' : 'Normal' }'/>
+                        <h:outputText value="#{cli.tipoCliente eq '1' ? 'Normal' : cli.tipoCliente eq '2' ? 'Especial' : cli.tipoCliente eq '3' ? 'VIP' : 'Normal' }"/>
                     </p:column>
                     <p:column headerText='Estado'>
-                        <h:outputText value='#{cli.estado}'/>
+                        <h:outputText value="#{cli.estado}"/>
                     </p:column>
                     <p:column headerText='Fecha Ingreso'>
-                        <h:outputText value='#{cli.fecIngreso}'>
+                        <h:outputText value="#{cli.fecIngreso}">
                             <f:convertDateTime locale="es_PY"
                                                timeZone="#{config.timeZoneDefault()}"
                                                pattern="dd/MM/yyyy"/>
@@ -203,10 +203,10 @@
                         <h:outputText value='#{prov.codProveedor}'/>
                     </p:column>
                     <p:column headerText='Persona'>
-                        <h:outputText value='#{prov.codPersona.nombre}'/>
+                        <h:outputText value="#{prov.codPersona.nombre}"/>
                     </p:column>
                     <p:column headerText='Estado'>
-                        <h:outputText value='#{prov.estado eq 'A' ? 'Activo' : 'Inactivo'}'/>
+                        <h:outputText value="#{prov.estado eq 'A' ? 'Activo' : 'Inactivo'}"/>
                     </p:column>
 
                     <p:column headerText="Modificar">
@@ -281,23 +281,23 @@
                              {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate ="10">
 
-                    <p:column headerText='Persona'>
-                        <h:outputText value='#{ba.codPer}'/>
+                    <p:column headerText="Persona">
+                        <h:outputText value="#{ba.codPer}"/>
                     </p:column>
-                    <p:column headerText='Telefono'>
-                        <h:outputText value='#{ba.numTel}'/>
+                    <p:column headerText="Telefono">
+                        <h:outputText value="#{ba.numTel}"/>
                     </p:column>
-                    <p:column headerText='Tipo telefono'>
-                        <h:outputText value='#{ba.tipoNum}'/>
+                    <p:column headerText="Tipo telefono">
+                        <h:outputText value="#{ba.tipoNum}"/>
                     </p:column>
-                    <p:column headerText='Tipo identificacion'>
-                        <h:outputText value='#{ba.tipoIden}' />
+                    <p:column headerText="Tipo identificacion">
+                        <h:outputText value="#{ba.tipoIden}" />
                     </p:column>
-                    <p:column headerText='Nro. identificacion'>
-                        <h:outputText value='#{ba.numTel}' />
+                    <p:column headerText="Nro. identificacion">
+                        <h:outputText value="#{ba.numTel}" />
                     </p:column>
-                    <p:column headerText='Direccion'>
-                        <h:outputText value='#{ba.detaDir}' />
+                    <p:column headerText="Direccion">
+                        <h:outputText value="#{ba.detaDir}" />
                     </p:column>
                     <p:column headerText='Telefono' style="width: 65px">
                         <p:commandButton icon="ui-icon-search" oncomplete="PF('digTelefono').show()" update=":formTelefono"

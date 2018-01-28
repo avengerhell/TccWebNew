@@ -79,7 +79,6 @@ public class CondicionEventoBean implements Serializable{
         condicion.setCondicionEventoPK(condicionPK);
         codEveFacade.create(condicion);
         condicion = new CondicionEvento();
-        condicionPK.setCodEvento(evento);
     }
 
     public void modificar() {

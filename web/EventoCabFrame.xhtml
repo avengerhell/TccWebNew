@@ -43,7 +43,12 @@
                 <p:calendar id="inicio" value="#{eventoCabBeanMB.evento.fecInicio}" pattern="dd/MM/yyyy" mask="true" />
 
                 <p:outputLabel value="Fecha de Fin: "/>
-                <p:calendar id="fin" value="#{eventoCabBeanMB.evento.fecFin}" pattern="dd/MM/yyyy" mask="true" />
+                <p:calendar id="fin" 
+                            value="#{eventoCabBeanMB.evento.fecFin}" 
+                            pattern="dd/MM/yyyy" 
+                            mask="true" >
+                    <f:ajax event="change" execute="@this" listener="#{eventoCabBeanMB.calculaFecha}" render="fin growl"/>
+                </p:calendar>
 
                 <p:outputLabel value="Estado: "/>
                 <p:selectOneMenu id="console" value="#{eventoCabBeanMB.evento.estado}" style="width:200px">
@@ -86,7 +91,7 @@
                     <p:inputText value="#{sectorBeanMB.sector.cantidad}" style="width:195px" pt:type="number"/> 
 
                 </p:panelGrid>
-                <p:commandButton value="Insertar Sector" actionListener="#{sectorBeanMB.insertar()}" update="growl2"/>
+                <p:commandButton value="Insertar Sector" actionListener="#{sectorBeanMB.insertar()}" update="growl2 formAddSector"/>
                 <p:commandButton value="Cancelar" onclick="inser.hide();"/> 
             </h:form>
         </p:dialog>
@@ -133,7 +138,7 @@
                     <p:inputText id="valo" value="#{condicionEventoBeanMB.condicion.valor}" style="width:200px" />
                 </p:panelGrid>
                 <p:commandButton value="Insertar Condicion" actionListener="#{condicionEventoBeanMB.insertar()}"
-                                 update="growl4"/>
+                                 update="growl4 formAddCondi"/>
                 <p:commandButton value="Cancelar" onclick="inser.hide();"/> 
             </h:form>
         </p:dialog>

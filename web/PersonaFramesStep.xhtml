@@ -63,8 +63,11 @@
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="Fecha de Nacimiento: "/>
-                                <p:calendar id="mask" value="#{personaBeanMB.persona.fecNacimiento}" pattern="dd/MM/yyyy" mask="true" style ="width:200px">
-                                    <p:ajax event="dateSelect" listener="#{personaBeanMB.calculaFecha}"/>
+                                <p:calendar id="mask" 
+                                            value="#{personaBeanMB.persona.fecNacimiento}" 
+                                            pattern="dd/MM/yyyy" mask="true" 
+                                            style ="width:200px">
+                                    <f:ajax event="change" execute="@this" listener="#{personaBeanMB.calculaFecha}" render="mask growl"/>
                                 </p:calendar>
 
                             </h:panelGrid>

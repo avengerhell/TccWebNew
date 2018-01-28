@@ -110,7 +110,7 @@
                         <h:outputText value='#{sec.descripcion}'/>
                     </p:column>
                     <p:column headerText='Ilimitado'>
-                        <h:outputText value='#{sec.ilimitado eq 'S' ? 'SI'  : 'NO' }'/>
+                        <h:outputText value="#{sec.ilimitado eq 'S' ? 'SI'  : 'NO' }"/>
                     </p:column>
                     <p:column headerText='Cantidad'>
                         <h:outputText value='#{sec.cantidad}'/>
@@ -167,22 +167,22 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate ="10">
-                    <p:column headerText='Inicio'>
-                        <h:outputText value='#{hor.fecInicio}'>
+                    <p:column headerText="Inicio">
+                        <h:outputText value="#{hor.fecInicio}">
                             <f:convertDateTime locale="es_PY"
                                                timeZone="#{config.timeZoneDefault()}"
                                                pattern="dd/MM/yyyy HH:mm"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText='Fin'>
-                        <h:outputText value='#{hor.fecFin}'>
+                    <p:column headerText="Fin">
+                        <h:outputText value="#{hor.fecFin}">
                             <f:convertDateTime locale="es_PY"
                                                timeZone="#{config.timeZoneDefault()}"
                                                pattern="dd/MM/yyyy HH:mm"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText='Disponible'>
-                        <h:outputText value='#{hor.disponible eq 'S' ? 'SI' : 'NO'}'></h:outputText>
+                    <p:column headerText="Disponible">
+                        <h:outputText value="#{hor.disponible eq 'S' ? 'SI' : 'NO'}"></h:outputText>
                     </p:column>
                     <p:column headerText="Modificar">
                         <p:commandButton value="Modificar" oncomplete="PF('digModHorario').show()" update="@([id$=formModHor])">
@@ -241,11 +241,11 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate ="10">
-                    <p:column headerText='Condición' style="width:80px">
-                        <h:outputText value='#{con.condicion.descripcion}'/>
+                    <p:column headerText="Condición" style="width:80px">
+                        <h:outputText value="#{con.condicion.descripcion}"/>
                     </p:column>
-                    <p:column headerText='Valor'>
-                        <h:outputText value='#{con.valor}'/>
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{con.valor}"/>
                     </p:column>
                     <p:column headerText="Modificar">
                         <p:commandButton value="Modificar" oncomplete="PF('digModCondicion').show()" update="@([id$=formModCon])">
@@ -290,21 +290,21 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate ="10">
-                    <p:column headerText='Sector' style="width:80px">
-                        <h:outputText value='#{lis.sector.descripcion}'/>
+                    <p:column headerText="Sector" style="width:80px">
+                        <h:outputText value="#{lis.sector.descripcion}"/>
                     </p:column>
-                    <p:column headerText='Valor'>
-                        <h:outputText value='#{lis.valor}'/>
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{lis.valor}"/>
                     </p:column>
-                    <p:column headerText='Fecha inicio'>
-                        <h:outputText value='#{lis.fecInicio}'>
+                    <p:column headerText="Fecha inicio">
+                        <h:outputText value="#{lis.fecInicio}">
                             <f:convertDateTime locale="es_PY"
                                                timeZone="#{config.timeZoneDefault()}"
                                                pattern="dd/MM/yyyy HH:mm"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText='Fecha fin'>
-                        <h:outputText value='#{lis.fecFin}'>
+                    <p:column headerText="Fecha fin">
+                        <h:outputText value="#{lis.fecFin}">
                             <f:convertDateTime locale="es_PY"
                                                timeZone="#{config.timeZoneDefault()}"
                                                pattern="dd/MM/yyyy HH:mm"/>
@@ -370,8 +370,8 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate ="10">
-                    <p:column headerText='Localidad' style="width:80px">
-                        <h:outputText value='#{loc.localidad.descripcion}'/>
+                    <p:column headerText="Localidad" style="width:80px">
+                        <h:outputText value="#{loc.localidad.descripcion}"/>
                     </p:column>
                     <p:column headerText="Modificar">
                         <p:commandButton value="Modificar" oncomplete="PF('digModPrecio').show()" update="@([id$=formModPre])">

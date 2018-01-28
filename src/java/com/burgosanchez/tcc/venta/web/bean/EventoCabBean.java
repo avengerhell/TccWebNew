@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +34,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import org.omnifaces.el.functions.Dates;
 
 /**
  *
@@ -202,6 +205,14 @@ public class EventoCabBean implements Serializable {
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         }
+    }
+    
+    public void calculaFecha(AjaxBehaviorEvent event){        
+       int k = evento.getFecInicio().compareTo(evento.getFecFin());
+       if (k > 0){
+           Messages.growlMessageError("La fecha de fin debe ser mayor o igual al inicio", null);
+           evento.setFecFin(null);
+       }
     }
 
 }

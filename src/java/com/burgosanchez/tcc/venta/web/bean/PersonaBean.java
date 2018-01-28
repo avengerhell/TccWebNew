@@ -25,16 +25,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import org.omnifaces.el.functions.Dates;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.SelectEvent;
@@ -281,7 +275,7 @@ System.out.println(contraints.getRootBeanClass().getSimpleName()+
         cliente.setCodCliente(String.valueOf(codcli));
         clienteFacade.create(cliente);
 
-        if (esProv) {
+        if (skip) {
             proveedor.setCodPersona(persona);
             proveedor.setCodProveedor(String.valueOf(provFacade.obtenerSecuenciaVal()));
             provFacade.create(proveedor);
@@ -317,7 +311,11 @@ System.out.println(contraints.getRootBeanClass().getSimpleName()+
 
     }
     
-    public void calculaFecha(SelectEvent event){
+    /**
+     *
+     * @param event
+     */
+    public void calculaFecha(AjaxBehaviorEvent event){
        int years =  Dates.yearsBetween(persona.getFecNacimiento(), new Date());
        if (years < 18){
            Messages.growlMessageError("La persona debe ser mayor a 18 años", null);

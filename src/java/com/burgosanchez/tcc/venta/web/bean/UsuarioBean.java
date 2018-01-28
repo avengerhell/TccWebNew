@@ -178,9 +178,11 @@ public class UsuarioBean implements Serializable {
             session.setAttribute("username", users.get(0));
             session.setAttribute("tipoUsuario", users.get(0).getTipoUsuario());
             if (users.get(0).getTipoUsuario().equals("1")) {
-                return "dashboard";
+                //return "dashboard";
+                return "charts";
             } else {
-                return "dashboard";
+                return "charts";
+                //return "dashboard";
             }
 
         } else {
