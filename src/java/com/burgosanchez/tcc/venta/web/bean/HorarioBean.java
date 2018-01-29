@@ -189,13 +189,14 @@ public class HorarioBean implements Serializable {
         if (k <= 0) {
             try {
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatDh = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 SimpleDateFormat formatH = new SimpleDateFormat("HH:mm");
                 horarioFacade.generaHorarios2(event,
                         String.valueOf(formatH.format(hora_desde)),
                         String.valueOf(formatH.format(hora_hasta)),
                         String.valueOf(format.format(fecha_desde)),
                         String.valueOf(format.format(fecha_hasta)),
-                        String.valueOf(format.format(apertura)));
+                        String.valueOf(formatDh.format(apertura)));
                 Messages.growlMessageInfo("Se crearon los horarios para el evento seleccionado", null);
             } catch (Exception e) {
                 System.out.println(e);

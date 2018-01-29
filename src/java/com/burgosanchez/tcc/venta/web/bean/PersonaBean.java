@@ -275,7 +275,7 @@ System.out.println(contraints.getRootBeanClass().getSimpleName()+
         cliente.setCodCliente(String.valueOf(codcli));
         clienteFacade.create(cliente);
 
-        if (skip) {
+        if (esProv) {
             proveedor.setCodPersona(persona);
             proveedor.setCodProveedor(String.valueOf(provFacade.obtenerSecuenciaVal()));
             provFacade.create(proveedor);
@@ -300,7 +300,8 @@ System.out.println(contraints.getRootBeanClass().getSimpleName()+
             return "cliente";
         } else if (cliente.getTipoCliente() != null) {
             if (skip) {
-                skip = false;   //reset in case user goes back
+                skip = false;
+                esProv = true;//reset in case user goes back
                 return "proveedor";
             }else{
                 return "confirm";

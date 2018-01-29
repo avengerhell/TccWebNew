@@ -50,6 +50,8 @@ public class EventoCabBean implements Serializable {
     private EventoCab evento;
     List<EventoCab> eventos;
     private String nombre;
+    private List<EventoCab> eventosReporte;
+    private EventoCab eventoRporte;
     private String proveedor;
 
     @Resource(name = "tccResource")
@@ -65,6 +67,26 @@ public class EventoCabBean implements Serializable {
 
     public void setEvento(EventoCab evento) {
         this.evento = evento;
+    }
+
+    public EventoCab getEventoRporte() {
+        return eventoRporte;
+    }
+
+    public void setEventoRporte(EventoCab eventoRporte) {
+        this.eventoRporte = eventoRporte;
+    }
+
+    public List<EventoCab> getEventosReporte() {
+        if (eventosReporte == null) {
+            eventosReporte = eventoFacade.findAll();
+        }
+
+        return eventosReporte;
+    }
+
+    public void setEventosReporte(List<EventoCab> eventosReporte) {
+        this.eventosReporte = eventosReporte;
     }
 
     public List<EventoCab> getEventos() {
@@ -173,7 +195,7 @@ public class EventoCabBean implements Serializable {
             Usuario user = (Usuario) session.getAttribute("username");
             String u = user.getNomUser();
             List<EventoCab> eve = eventoFacade.obtenerEventosUsuario(u);
-            parametros.put("p_cod_evento", eve.get(0).getCodEvento());
+            parametros.put("p_cod_evento", eventoRporte.getCodEvento());
 
             File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("reportes" + File.separator + "reporteDeEntradas.jasper"));
             System.out.println(jasper.getPath());
@@ -206,13 +228,13 @@ public class EventoCabBean implements Serializable {
             System.out.println(e.getLocalizedMessage());
         }
     }
-    
-    public void calculaFecha(AjaxBehaviorEvent event){        
-       int k = evento.getFecInicio().compareTo(evento.getFecFin());
-       if (k > 0){
-           Messages.growlMessageError("La fecha de fin debe ser mayor o igual al inicio", null);
-           evento.setFecFin(null);
-       }
+
+    public void calculaFecha(AjaxBehaviorEvent event) {
+        int k = evento.getFecInicio().compareTo(evento.getFecFin());
+        if (k > 0) {
+            Messages.growlMessageError("La fecha de fin debe ser mayor o igual al inicio", null);
+            evento.setFecFin(null);
+        }
     }
 
 }

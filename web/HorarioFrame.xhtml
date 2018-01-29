@@ -21,11 +21,14 @@
                 </p:selectOneMenu>
 
                 <p:outputLabel value="Hora desde: "/>
-                <p:calendar id="hD" value="#{horarioBeanMB.hora_desde}" pattern="HH:mm" timeOnly="true"/>
+                <p:calendar id="hD" value="#{horarioBeanMB.hora_desde}" pattern="HH:mm" timeOnly="true">
+                <f:convertDateTime type="date" pattern="HH:mm"/>
+                </p:calendar>
 
                 <p:outputLabel value="Hora Hasta: "/>
-                <p:calendar id="hh" value="#{horarioBeanMB.hora_hasta}" pattern="HH:mm" timeOnly="true"/>
-
+                <p:calendar id="hh" value="#{horarioBeanMB.hora_hasta}" pattern="HH:mm" timeOnly="true">
+                <f:convertDateTime type="date" pattern="HH:mm"/>
+                </p:calendar>
                 <p:outputLabel value="Fecha de Inicio: "/>
                 <p:calendar id="inicio" value="#{horarioBeanMB.fecha_desde}" pattern="dd/MM/yyyy" mask="true">
                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
@@ -36,8 +39,8 @@
                     <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                 </p:calendar>
                 <p:outputLabel value="Apertura: "/>
-                <p:calendar id="apertura" value="#{horarioBeanMB.apertura}" pattern="MM/dd/yyyy HH:mm:ss" mask="true" >
-                    <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                <p:calendar id="apertura" value="#{horarioBeanMB.apertura}" pattern="dd/MM/yyyy HH:mm:ss" mask="true" >
+                    <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm:ss" />
                 </p:calendar>
 
             </p:panelGrid>

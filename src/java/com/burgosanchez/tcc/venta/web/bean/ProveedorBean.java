@@ -64,6 +64,7 @@ public class ProveedorBean implements Serializable {
 
     private Proveedor proveedor;
     List<Proveedor> proveedores;
+    List<Proveedor> proveedoresPersona;
 
     /*CREACION DE VARIABLES GLOBALES*/
     private String re;
@@ -113,6 +114,16 @@ public class ProveedorBean implements Serializable {
         this.re = re;
     }
 
+    public List<Proveedor> getProveedoresPersona() {
+        return proveedoresPersona;
+    }
+
+    public void setProveedoresPersona(List<Proveedor> proveedoresPersona) {
+        this.proveedoresPersona = proveedoresPersona;
+    }
+    
+    
+
     public List<Proveedor> completeProveedor(String query) {
         List<Proveedor> allIdent = provFacade.findAll();
         List<Proveedor> filteredIdent = new ArrayList<>();
@@ -128,12 +139,13 @@ public class ProveedorBean implements Serializable {
     }
 
     public void obtenerProveedor(Persona pe) {
-        proveedores = null;
+        proveedoresPersona = null;
+        //proveedoresPersona
         re = pe.getCodPersona().toLowerCase();
         //re = "%"+re+"%";
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("per", "%" + re + "%");
-        proveedores = provFacade.obtenerProveedor(re);
+        proveedoresPersona = provFacade.obtenerProveedor(re);
     }
 
     public void modificar() {

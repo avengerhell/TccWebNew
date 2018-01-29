@@ -57,6 +57,7 @@ public class UsuarioBean implements Serializable {
     private EventoCab eventoSelected;
     private List<Sector> sectores;
     private Sector sectorSelected;
+    private String nomUser;
 
     private String usuarioNombre;
 
@@ -85,7 +86,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public List<Usuario> getUsers() {
-       // users = usuarioFacade.findAll();-->HAY QUE CARGAR DE OTRA FORMA ESTE GET O SINO LE CAGA A ALGUNOS FORMS
+        // users = usuarioFacade.findAll();-->HAY QUE CARGAR DE OTRA FORMA ESTE GET O SINO LE CAGA A ALGUNOS FORMS
         return users;
     }
 
@@ -160,6 +161,17 @@ public class UsuarioBean implements Serializable {
     public void setSectorSelected(Sector sectorSelected) {
         this.sectorSelected = sectorSelected;
     }
+
+    public String getNomUser() {
+        HttpSession session = SessionBean.getSession();
+        Usuario user = (Usuario) session.getAttribute("username");
+        nomUser= user.getPersona().getNombre()+ " "+user.getPersona().getApellido();
+        return nomUser;
+    }
+
+    public void setNomUser(String nomUser) {
+        this.nomUser = nomUser;
+    }
     
     
 
@@ -198,7 +210,8 @@ public class UsuarioBean implements Serializable {
     public String logout() {
         HttpSession session = SessionBean.getSession();
         session.invalidate();
-        return "login";
+        //return "login";
+        return "";
     }
 //endregion 
 
@@ -217,12 +230,12 @@ public class UsuarioBean implements Serializable {
             user.setUsuarioPK(uPK);
             personaFacade.create(persona);
             usuarioFacade.create(user);
-            usuarioFacade.insertarUsuarioEvento(user, eventoSelected,sectorSelected);
+            usuarioFacade.insertarUsuarioEvento(user, eventoSelected, sectorSelected);
             Messages.growlMessageInfo("Se creó exitosamente el usuario", null);
             limpiarCampos();
 
         } else {
-            Messages.growlMessageWarning("Error en al creación del usuario verifique los campos",null);
+            Messages.growlMessageWarning("Error en al creación del usuario verifique los campos", null);
         }
 
     }

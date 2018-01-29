@@ -32,6 +32,7 @@ public class ListaPrecioBean implements Serializable {
 
     private ListaPrecio lista;
     List<ListaPrecio> listas;
+    List<ListaPrecio> lpEvento;
     List<Sector> sectores;
     private ListaPrecioPK listaPK;
     String evento;
@@ -57,6 +58,16 @@ public class ListaPrecioBean implements Serializable {
         this.listas = listas;
     }
 
+    public List<ListaPrecio> getLpEvento() {
+        return lpEvento;
+    }
+
+    public void setLpEvento(List<ListaPrecio> lpEvento) {
+        this.lpEvento = lpEvento;
+    }
+    
+    
+
     public List<Sector> getSectores() {
         if (lista.getEventoCab() == null) {//|| lista.getEventoCab().getCodEvento().isEmpty()) {
             sectores = sectorFacade.findAll();
@@ -71,13 +82,13 @@ public class ListaPrecioBean implements Serializable {
     }
 
     public void obtenerListaPrecioEvento(String cod) {
-
+        lpEvento = listaFacade.obtenerCondicionEven(cod);
     }
 
     public void insertar() {
         int k = lista.getFecInicio().compareTo(lista.getFecFin());
         if (k <= 0) {
-            if (listaFacade.verificaLista(evento, lista.getSector().getSectorPK().getCodSector(), lista.getFecInicio(), lista.getFecFin())) {
+            if (!listaFacade.verificaLista(lista.getEventoCab().getCodEvento(), lista.getSector().getSectorPK().getCodSector(), lista.getFecInicio(), lista.getFecFin())) {
                 listaPK.setCodLista(String.valueOf(listaFacade.obtenerSecuenciaVal()));
                 if (evento != null) {
                     listaPK.setCodEvento(evento);

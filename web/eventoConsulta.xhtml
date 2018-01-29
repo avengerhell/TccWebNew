@@ -36,6 +36,9 @@
                                  actionListener="#{eventoCabBeanMB.generarReporteEntradas}"
                                  ajax="false">
                 </p:commandButton>
+                <p:commandButton icon="ui-icon-search" 
+                                 oncomplete="PF('digReporte').show()" 
+                                 update="@([id$=formReporte])"/>
             </p:panelGrid>
             <div style="height: 1000px; overflow: auto;">
                 <p:dataTable id="datta" var="ev" value="#{eventoCabBeanMB.eventos}"
@@ -75,12 +78,12 @@
                         <p:commandButton icon="ui-icon-search" oncomplete="PF('digHorario').show()" update="@([id$=formHorario])"
                                          actionListener="#{horarioBeanMB.obtenerHorarios(ev.codEvento)}"/>
                     </p:column>
-                    <!--<p:column headerText='Condiciones' style="width: 65px">
-                        <p:commandButton icon="ui-icon-search" oncomplete="PF('digHorario').show()" update="@([id$=formHorario])"
-                                         actionListener="#condicionEventoBeanMB.obtenerCondicionEve(ev.codEvento)}"/>
-                    </p:column>-->
+                    <p:column headerText='Condiciones' style="width: 65px">
+                        <p:commandButton icon="ui-icon-search" oncomplete="PF('digCondicion').show()" update="@([id$=formHorario])"
+                                         actionListener="#{condicionEventoBeanMB.obtenerCondicionEve(ev.codEvento)}"/>
+                    </p:column>
                     <p:column headerText='Precios' style="width: 65px">
-                        <p:commandButton icon="ui-icon-search" oncomplete="PF('digPrecio').show()" update="@([id$=formPrecio])"
+                        <p:commandButton icon="ui-icon-search" oncomplete="PF('digPrecio').show()" update="@([id$=formCondicion])"
                                          actionListener="#{listaPrecioBeanMB.obtenerListaPrecioEvento(ev.codEvento)}"/>
                     </p:column>
                     <p:column headerText='Localidades' style="width: 65px">
@@ -284,7 +287,7 @@
                   hideEffect="explode" widgetVar="digPrecio" modal="true"  
                   resizable="true" minWidth="200" closeOnEscape="true" height="410" >
             <h:form id ="formPrecio">
-                <p:dataTable id="precData" var="lis" value="#{listaPrecioBeanMB.listas}"
+                <p:dataTable id="precData" var="lis" value="#{listaPrecioBeanMB.lpEvento}"
                              emptyMessage="El evento no posee lista de precios"
                              paginator="true" rows="10" paginatorPosition="top"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
@@ -381,6 +384,33 @@
 
                 </p:dataTable>
 
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="dgReporte" header="Reportes" showEffect="explode" 
+                  hideEffect="explode" widgetVar="digReporte" modal="true"  
+                  resizable="true" minWidth="200" closeOnEscape="true" height="410" >
+            <h:form id ="formReporte">
+                <p:panelGrid columns="2">
+                    <p:selectOneMenu id="eventoDg" 
+                                     value="#{eventoCabBeanMB.eventoRporte}" 
+                                     style="width:200px" 
+                                     converter="omnifaces.SelectItemsConverter" 
+                                     required="true">
+                        <f:selectItem itemLabel="Seleccionar Evento del Usuario" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{eventoCabBeanMB.eventosReporte}"
+                                       var="pa"
+                                       itemLabel="#{pa.descripcion}"
+                                       itemValue="#{pa}"/>
+                        <p:clientValidator />
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+                <p:commandButton id ="btnRepDocDg"
+                                 value="Reporte Entradas"
+                                 actionListener="#{eventoCabBeanMB.generarReporteEntradas}"
+                                 ajax="false">
+                </p:commandButton>
             </h:form>
         </p:dialog>
     </ui:define>

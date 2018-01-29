@@ -34,7 +34,7 @@
        Inner Join SECTOR s
                On e.COD_SECTOR = s.COD_SECTOR
               And e.COD_EVENTO = s.COD_EVENTO
-WHERE e.cod_evento = $P{p_cod_evento}]]>
+WHERE e.cod_evento = nvl($P{p_cod_evento},e.cod_evento)]]>
 	</queryString>
 	<field name="NOM_EVENTO" class="java.lang.String"/>
 	<field name="INICIO_EVENTO" class="java.sql.Timestamp"/>
