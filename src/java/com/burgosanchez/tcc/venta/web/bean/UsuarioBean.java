@@ -164,16 +164,20 @@ public class UsuarioBean implements Serializable {
 
     public String getNomUser() {
         HttpSession session = SessionBean.getSession();
+        if(session != null){
         Usuario user = (Usuario) session.getAttribute("username");
-        nomUser= user.getPersona().getNombre()+ " "+user.getPersona().getApellido();
+        if (user != null) {
+            nomUser = user.getPersona().getNombre() + " " + user.getPersona().getApellido();
+        }else
+            nomUser = "";
+        }else
+            nomUser = "";
         return nomUser;
     }
 
     public void setNomUser(String nomUser) {
         this.nomUser = nomUser;
     }
-    
-    
 
 //<editor-fold>
 //region Sesiones
