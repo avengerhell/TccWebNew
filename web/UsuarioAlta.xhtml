@@ -14,7 +14,7 @@
                         <div class="card">
                             <h1>Datos Básicos</h1>
                             <p:panel header="ALTA DE USUARIO" >
-                                <h:panelGrid columns="4" cellpadding="5" columnClasses="ui-grid-col-5,ui-grid-col-5"  styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
+                                <h:panelGrid columns="4" cellpadding="5" columnClasses="ui-grid-col-6,ui-grid-col-6"  styleClass="ui-panelgrid-blank" style="border:0px none; background-color:transparent;">
 
                                     <p:outputLabel for="nombre" value="Nombre: " title="Nombre: "/>
                                     <p:inputText id="nombre" value="#{usuarioBeanMB.persona.nombre}" maxlength="15" style ="width:200px" required="true" >
@@ -76,9 +76,12 @@
                                     <h:outputText value="#{usuarioBeanMB.text}" />
 
                                     <p:outputLabel for="tipoU" value="Tipo de Usuario: " />
-                                    <p:inputText id="tipoU" value="#{usuarioBeanMB.user.tipoUsuario}" style="width:200px" required="true">
+                                    <p:selectOneMenu id="genero" value="#{usuarioBeanMB.user.tipoUsuario}" style="width:200px" required="true">
+                                        <f:selectItem itemLabel="Seleccionar Sexo: " itemValue="#{null}" />
+                                        <f:selectItem itemLabel="Verificador" itemValue="2" />
+                                        <f:selectItem itemLabel="Administrador" itemValue="1" />
                                         <p:clientValidator />
-                                    </p:inputText>
+                                    </p:selectOneMenu>
                                     <p:message for="tipoU" display="icon" />
                                     <h:outputText value="#{usuarioBeanMB.text}" />
 

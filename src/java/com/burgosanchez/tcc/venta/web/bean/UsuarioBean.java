@@ -163,15 +163,13 @@ public class UsuarioBean implements Serializable {
     }
 
     public String getNomUser() {
-        HttpSession session = SessionBean.getSession();
-        if(session != null){
-        Usuario user = (Usuario) session.getAttribute("username");
-        if (user != null) {
-            nomUser = user.getPersona().getNombre() + " " + user.getPersona().getApellido();
-        }else
+        //HttpSession session = SessionBean.getSession();
+        //if (session != null) {
+            nomUser = SessionBean.getNombreUsuario();
+            
+        /*} else {
             nomUser = "";
-        }else
-            nomUser = "";
+        }*/
         return nomUser;
     }
 
@@ -192,6 +190,7 @@ public class UsuarioBean implements Serializable {
         if (valid) {
             HttpSession session = SessionBean.getSession();
             session.setAttribute("username", users.get(0));
+            session.setAttribute("nomusuario", users.get(0).getPersona().getNombre());
             session.setAttribute("tipoUsuario", users.get(0).getTipoUsuario());
             if (users.get(0).getTipoUsuario().equals("1")) {
                 //return "dashboard";
@@ -214,8 +213,8 @@ public class UsuarioBean implements Serializable {
     public String logout() {
         HttpSession session = SessionBean.getSession();
         session.invalidate();
-        //return "login";
-        return "";
+        return "login";
+        //return "";
     }
 //endregion 
 

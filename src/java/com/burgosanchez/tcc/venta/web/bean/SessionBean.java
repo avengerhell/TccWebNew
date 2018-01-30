@@ -29,6 +29,12 @@ public class SessionBean {
                 .getExternalContext().getSession(false);
         return session.getAttribute("username").toString();
     }
+    
+    public static String getNombreUsuario() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        return session.getAttribute("nomusuario").toString();
+    }
  
     public static String getUserId() {
         HttpSession session = getSession();
